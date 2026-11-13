@@ -1,0 +1,2951 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>ROAD TO SNBT 2027 — Brain Academy Bogor Permata</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- MathJax CDN Configuration & Script -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    input, textarea, .selectable-text {
+      user-select: text;
+    }
+
+    @keyframes urgentBlink {
+      0%, 100% {
+        background-color: #dc2626;
+        color: #ffffff;
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+      }
+      50% {
+        background-color: #991b1b;
+        color: #fee2e2;
+        box-shadow: 0 0 12px 2px rgba(220, 38, 38, 0.85);
+      }
+    }
+
+    .timer-critical {
+      animation: urgentBlink 0.75s infinite ease-in-out;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .footer-copyright {
+      font-size: 9pt !important;
+      line-height: 1.4;
+    }
+
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-slate-100 text-slate-900">
+
+  <!-- STICKY TOP HEADER -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 flex flex-wrap items-center justify-between gap-2">
+      <!-- Header Kiri: 2 Logo Resmi + Identitas -->
+      <div class="flex items-center gap-2.5 sm:gap-3 min-w-0">
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="https://ibb.co.com/FqHthPMJ" target="_blank" rel="noopener noreferrer" class="shrink-0">
+            <img src="https://i.ibb.co.com/YT0GNrM8/15deeda1acc7759659777b4a36da6456.jpg" alt="Ruangguru" class="h-8 w-8 sm:h-9 sm:w-9 rounded-lg object-cover shadow-sm">
+          </a>
+          <a href="https://ibb.co.com/6cdwc3RP" target="_blank" rel="noopener noreferrer" class="shrink-0">
+            <img src="https://i.ibb.co.com/fVcFVhYp/logo-header-ba-2.png" alt="Brain Academy" class="h-8 sm:h-9 w-auto object-contain">
+          </a>
+        </div>
+        <div class="h-6 w-px bg-slate-200 hidden sm:block"></div>
+        <span class="font-sans font-bold text-xs sm:text-sm md:text-base text-slate-800 tracking-tight truncate">
+          BAC Bogor - Permata (Road to SNBT 2027)
+        </span>
+      </div>
+
+      <!-- Header Kanan: Badge Subtes & Floating Countdown Timer -->
+      <div id="headerRightControls" class="hidden flex items-center gap-2 sm:gap-3 ml-auto">
+        <span id="stageBadge" class="hidden md:inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-200">
+          Tahap 1: Penguatan Konsep Bahasa Indonesia
+        </span>
+        <div id="timerBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full font-bold text-xs sm:text-sm bg-blue-600 text-white shadow-md transition-colors duration-200">
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span id="timerDisplay" class="tabular-nums tracking-wider">00:30</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN APPLICATION CONTAINER -->
+  <main id="appContainer" class="flex-1 max-w-6xl w-full mx-auto px-3 sm:px-6 py-5 sm:py-8">
+
+    <!-- VIEW 0: DEADLINE / PERIODE NOTICE -->
+    <section id="deadlineView" class="hidden max-w-2xl mx-auto my-8 bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-10 text-center fade-in">
+      <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <h1 class="text-xl sm:text-2xl font-extrabold text-blue-700 font-sans mb-1">ROAD TO SNBT 2027</h1>
+      <p class="text-xs sm:text-sm font-medium text-slate-500 mb-6">Diagnostic &amp; Weekly Mastery Drill — Brain Academy Bogor Permata</p>
+      <div id="deadlineMessageBox" class="bg-slate-50 border border-slate-200 rounded-xl p-5 text-slate-700 text-sm sm:text-base leading-relaxed">
+        <!-- Populated dynamically -->
+      </div>
+    </section>
+
+    <!-- VIEW 1: WELCOMING PAGE & IDENTITAS SISWA -->
+    <section id="welcomeView" class="hidden max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden fade-in">
+      <div class="bg-gradient-to-r from-blue-50 via-indigo-50 to-sky-50 border-b border-blue-100 px-6 sm:px-10 py-7 text-center">
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-blue-700 font-sans tracking-tight">
+          ROAD TO SNBT 2027
+        </h1>
+        <p class="mt-1.5 text-sm sm:text-base font-semibold text-slate-700">
+          Diagnostic &amp; Weekly Mastery Drill — Brain Academy Bogor Permata
+        </p>
+      </div>
+
+      <div class="p-6 sm:p-10 space-y-6">
+        <!-- Aturan Pengerjaan -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 sm:p-6">
+          <h2 class="text-sm sm:text-base font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+            Aturan Pengerjaan Soal Latihan
+          </h2>
+          <ol class="list-decimal list-outside ml-5 space-y-2.5 text-sm sm:text-[15px] text-slate-700 leading-relaxed">
+            <li>
+              <span class="font-semibold text-slate-900">Latihan terbagi menjadi 2 bagian:</span>
+              <ul class="list-disc list-outside ml-5 mt-1 space-y-1 text-slate-600">
+                <li><strong class="text-slate-800">Tahap 1:</strong> Latihan soal penguatan konsep Bahasa Indonesia sesuai kemampuan siswa (Sistem Diagnostik Adaptif).</li>
+                <li><strong class="text-slate-800">Tahap 2:</strong> Latihan mingguan SNBT subtes Pengetahuan dan Pemahaman Umum.</li>
+              </ul>
+            </li>
+            <li>Latihan akan terbuka untuk dikerjakan selama periode: <strong class="text-blue-700">16 - 22 November 2026</strong>.</li>
+            <li>Jawaban hanya bisa diklik <strong class="text-slate-900">1 kali</strong> ya dan pembahasan soal akan muncul setelah periode latihan berakhir.</li>
+            <li>Pada akhir latihan ini, siswa dapat langsung melihat skor akhir dan analisisnya.</li>
+          </ol>
+        </div>
+
+        <!-- Pesan Motivasi -->
+        <div class="bg-blue-50/80 border-l-4 border-blue-600 rounded-r-xl p-4 sm:p-5">
+          <p class="text-sm sm:text-base font-semibold text-blue-900 italic leading-relaxed">
+            "Semangat terus ya, Brainies! Kita berikan usaha yang maksimal untuk hasil yang terbaik ya teman-teman."
+          </p>
+        </div>
+
+        <!-- Formulir Identitas Siswa -->
+        <form id="identityForm" class="space-y-4 pt-2" novalidate>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label for="studentNameInput" class="block text-sm font-bold text-slate-700 mb-1.5">
+                Nama Lengkap Siswa <span class="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="studentNameInput"
+                placeholder="Masukkan nama lengkap kamu..."
+                autocomplete="off"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm sm:text-base font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+              />
+            </div>
+
+            <div>
+              <label for="studentClassSelect" class="block text-sm font-bold text-slate-700 mb-1.5">
+                Pilihan Kelas <span class="text-red-500">*</span>
+              </label>
+              <select
+                id="studentClassSelect"
+                required
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm sm:text-base font-medium focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+              >
+                <option value="">-- Pilih Kelas --</option>
+                <option value="12 IPA 1">12 IPA 1</option>
+                <option value="12 IPA 2">12 IPA 2</option>
+                <option value="12 IPS 1">12 IPS 1</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-3">
+            <button
+              type="submit"
+              id="startExamBtn"
+              disabled
+              class="w-full py-3.5 px-6 rounded-xl font-bold text-base text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <span>Mulai Latihan</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- VIEW 2: CBT EXAM INTERFACE (TAHAP 1 & TAHAP 2) -->
+    <section id="examView" class="hidden space-y-4 fade-in">
+      <!-- Sub-header Identitas Siswa & Progres / Palet -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5">
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 font-bold flex items-center justify-center text-sm uppercase" id="avatarInitials">
+              BA
+            </div>
+            <div>
+              <div id="examStudentName" class="text-sm font-bold text-slate-900 leading-tight">Nama Siswa</div>
+              <div id="examStudentClass" class="text-xs font-medium text-slate-500">Kelas</div>
+            </div>
+          </div>
+          <div id="mobileStageLabel" class="md:hidden text-xs font-bold px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200">
+            Tahap 1
+          </div>
+        </div>
+
+        <!-- TAHAP 1: Progress Bar Bagian (TANPA NOMOR SOAL) -->
+        <div id="stage1ProgressWrapper" class="pt-3.5">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-600 mb-1.5">
+            <span id="stage1SectionTitle">Bagian A — Penguatan Konsep Bahasa Indonesia</span>
+            <span id="stage1ProgressPercent" class="text-blue-700 font-bold">Progres Bagian: 10%</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+            <div id="stage1ProgressBar" class="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-300" style="width: 10%;"></div>
+          </div>
+        </div>
+
+        <!-- TAHAP 2: Palet Nomor Soal (1 - 10) -->
+        <div id="stage2PaletteWrapper" class="hidden pt-3.5">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+            <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Palet Nomor Soal (Tahap 2 — PPU)</span>
+            <div class="flex flex-wrap items-center gap-3 text-[11px] font-medium text-slate-600">
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-emerald-500 inline-block"></span> Benar</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-rose-500 inline-block"></span> Salah</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm bg-white border border-slate-300 inline-block"></span> Belum</span>
+              <span class="inline-flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-sm ring-2 ring-blue-600 bg-blue-50 inline-block"></span> Aktif</span>
+            </div>
+          </div>
+          <div id="stage2PaletteGrid" class="grid grid-cols-5 sm:grid-cols-10 gap-2">
+            <!-- Buttons 1-10 rendered via JS -->
+          </div>
+        </div>
+      </div>
+
+      <!-- KONTEN SOAL AKTIF -->
+      <div id="questionWorkspace" class="grid grid-cols-1 gap-4">
+        <!-- Wacana Panel (Khusus Tahap 2) -->
+        <div id="passagePanel" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 max-h-[65vh] overflow-y-auto">
+          <div class="inline-block px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-bold uppercase tracking-wider mb-3" id="passageTitle">
+            WACANA
+          </div>
+          <div id="passageContent" class="space-y-3 text-sm sm:text-[15px] text-slate-800 leading-relaxed text-justify">
+            <!-- Wacana paragraphs -->
+          </div>
+        </div>
+
+        <!-- Panel Butir Soal & Opsi Jawaban -->
+        <div id="questionCard" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-7 flex flex-col justify-between">
+          <div>
+            <!-- Header Soal: Hanya muncul nomor soal pada Tahap 2 -->
+            <div class="flex items-center justify-between gap-2 mb-4">
+              <span id="questionNumberHeader" class="hidden px-3 py-1 rounded-lg bg-blue-600 text-white text-xs sm:text-sm font-bold">
+                Soal Nomor 1
+              </span>
+              <span id="questionTopicBadge" class="text-xs font-semibold text-slate-500 bg-slate-100 px-3 py-1 rounded-lg">
+                Topik Materi
+              </span>
+            </div>
+
+            <!-- Teks Pertanyaan -->
+            <div id="questionText" class="text-base sm:text-[17px] font-medium text-slate-900 leading-relaxed mb-6 space-y-3">
+              <!-- Question HTML -->
+            </div>
+
+            <!-- Container Pilihan Ganda (A-E) -->
+            <div id="mcqOptionsContainer" class="space-y-3">
+              <!-- Options rendered via JS -->
+            </div>
+
+            <!-- Container Isian Singkat (Bilangan Bulat Positif) -->
+            <div id="shortAnswerContainer" class="hidden space-y-4">
+              <div class="max-w-sm">
+                <label for="shortAnswerInput" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">
+                  Masukkan Jawaban Angka Bulat Positif:
+                </label>
+                <input
+                  type="text"
+                  id="shortAnswerInput"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  placeholder="Contoh: 3"
+                  autocomplete="off"
+                  class="w-full px-4 py-3.5 text-lg font-bold text-slate-900 rounded-xl border-2 border-slate-300 focus:outline-none focus:border-blue-600 transition"
+                />
+              </div>
+              <button
+                type="button"
+                id="submitShortAnswerBtn"
+                disabled
+                class="px-6 py-3 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed transition shadow-sm"
+              >
+                Kunci Jawaban
+              </button>
+            </div>
+
+            <!-- Container Tabel Benar / Salah (Soal 5 & 9 Tahap 2) -->
+            <div id="tableBSContainer" class="hidden space-y-4">
+              <div class="overflow-x-auto border border-slate-200 rounded-xl">
+                <table class="w-full text-left border-collapse text-sm">
+                  <thead>
+                    <tr class="bg-slate-100 border-b border-slate-200 text-slate-700 font-bold">
+                      <th class="p-3.5">Pernyataan Analisis Makna Kata</th>
+                      <th class="p-3.5 text-center w-24">Benar</th>
+                      <th class="p-3.5 text-center w-24">Salah</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBSBody" class="divide-y divide-slate-200">
+                    <!-- Rows rendered via JS -->
+                  </tbody>
+                </table>
+              </div>
+              <button
+                type="button"
+                id="submitTableBSBtn"
+                disabled
+                class="px-6 py-3 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed transition shadow-sm"
+              >
+                Kunci Jawaban Tabel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANEL TOMBOL SELESAI LATIHAN (HANYA MUNCUL JIKA SEMUA SOAL TAHAP 1 & 2 SELESAI) -->
+      <div id="finishActionPanel" class="hidden bg-white rounded-2xl shadow-lg border-2 border-blue-600 p-6 sm:p-8 text-center fade-in">
+        <div class="w-14 h-14 mx-auto mb-3 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mb-1">
+          Seluruh Soal Tahap 1 dan Tahap 2 Telah Selesai!
+        </h3>
+        <p class="text-sm text-slate-600 mb-5">
+          Klik tombol di bawah ini untuk mengunci hasil pengerjaan dan melihat analisis skor kamu.
+        </p>
+        <button
+          type="button"
+          id="finishExamBtn"
+          class="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-bold text-base text-white bg-emerald-600 hover:bg-emerald-700 shadow-md hover:shadow-lg transition"
+        >
+          <span>Selesai Latihan &amp; Lihat Analisis Skor</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- VIEW 3: CLOSING PAGE & ANALISIS SKOR -->
+    <section id="closingView" class="hidden max-w-4xl mx-auto space-y-6 fade-in">
+      <!-- Banner Hasil Utama -->
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-800 px-6 sm:px-8 py-6 text-white">
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <span class="inline-block px-2.5 py-0.5 rounded-md bg-white/20 text-xs font-bold tracking-wider uppercase mb-1.5">
+                Hasil Evaluasi Diagnostik &amp; Mingguan
+              </span>
+              <h2 class="text-xl sm:text-2xl font-extrabold tracking-tight" id="closingStudentName">Nama Siswa</h2>
+              <p class="text-xs sm:text-sm text-blue-100 font-medium" id="closingStudentClass">Kelas</p>
+            </div>
+            <div id="syncStatusBadge" class="px-3 py-1.5 rounded-full bg-white/15 text-xs font-semibold flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Data Tersimpan</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-8 space-y-6">
+          <!-- 2 Nilai Utama -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5">
+              <div class="text-xs font-bold uppercase tracking-wider text-blue-700 mb-1">
+                1. Nilai Konsep Bahasa Indonesia
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="scoreStage1Value" class="text-3xl sm:text-4xl font-extrabold text-slate-900">0</span>
+                <span class="text-sm font-semibold text-slate-500">/ 100</span>
+              </div>
+              <p id="scoreStage1Detail" class="mt-1.5 text-xs font-medium text-slate-600">
+                Benar 0 dari 0 soal ditampilkan
+              </p>
+            </div>
+
+            <div class="bg-indigo-50/70 border border-indigo-200 rounded-2xl p-5">
+              <div class="text-xs font-bold uppercase tracking-wider text-indigo-700 mb-1">
+                2. Nilai Pengetahuan dan Pemahaman Umum
+              </div>
+              <div class="flex items-baseline gap-2">
+                <span id="scoreStage2Value" class="text-3xl sm:text-4xl font-extrabold text-slate-900">0</span>
+                <span class="text-sm font-semibold text-slate-500">/ 100</span>
+              </div>
+              <p id="scoreStage2Detail" class="mt-1.5 text-xs font-medium text-slate-600">
+                Benar 0 dari 10 soal
+              </p>
+            </div>
+          </div>
+
+          <!-- Ringkasan Benar, Salah, Durasi -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-4">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4 text-center">
+              <div class="text-xs font-semibold text-emerald-700 mb-0.5">Total Benar</div>
+              <div id="summaryTotalCorrect" class="text-xl sm:text-2xl font-extrabold text-emerald-800">0</div>
+            </div>
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4 text-center">
+              <div class="text-xs font-semibold text-rose-700 mb-0.5">Total Salah</div>
+              <div id="summaryTotalWrong" class="text-xl sm:text-2xl font-extrabold text-rose-800">0</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 text-center">
+              <div class="text-xs font-semibold text-slate-600 mb-0.5">Durasi Pengerjaan</div>
+              <div id="summaryDuration" class="text-xl sm:text-2xl font-extrabold text-slate-900 tabular-nums">00:00</div>
+            </div>
+          </div>
+
+          <!-- Format Analisis Mentah (WAJIB TERSEMBUNYI SECARA VISUAL) + Tombol Salin -->
+          <div class="pt-1 flex flex-wrap items-center justify-between gap-3 border-t border-slate-100">
+            <p class="text-xs text-slate-500">
+              Pembahasan lengkap akan dibuka secara resmi setelah periode latihan berakhir (22 November 2026).
+            </p>
+            <button
+              type="button"
+              id="copyAnalysisBtn"
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 hover:bg-slate-900 text-white shadow-sm transition"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+              </svg>
+              <span id="copyAnalysisBtnText">Salin Laporan Analisis</span>
+            </button>
+          </div>
+          <pre id="rawAnalysisHidden" class="hidden" style="display: none;"></pre>
+        </div>
+      </div>
+
+      <!-- Rekomendasi Agenda Konsultasi (Klinik PR BA) -->
+      <div class="bg-white rounded-2xl shadow-sm border border-amber-200 overflow-hidden">
+        <div class="bg-amber-50 border-b border-amber-200 px-6 py-4 flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-sm sm:text-base font-extrabold text-amber-950">Rekomendasi Agenda Konsultasi (Klinik PR BA)</h3>
+            <p class="text-xs text-amber-800">Prioritas materi yang disarankan untuk didiskusikan bersama Master Teacher Brain Academy Bogor Permata</p>
+          </div>
+        </div>
+        <div id="klinikPrRecommendations" class="p-6 text-sm text-slate-700 space-y-2">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Pemetaan Penguasaan Subtopik -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+        <h3 class="text-base sm:text-lg font-extrabold text-slate-900 mb-1">Pemetaan Penguasaan Subtopik</h3>
+        <p class="text-xs sm:text-sm text-slate-500 mb-5">Evaluasi ketuntasan berdasarkan seluruh subtopik yang telah kamu kerjakan pada Tahap 1 dan Tahap 2.</p>
+        <div id="subtopicMasteryGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+          <!-- Subtopic cards rendered via JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t border-slate-200 py-3.5 px-4 sm:px-6 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <p class="footer-copyright text-slate-500 font-medium text-left">
+        Copyright © 2026 Brain Academy Bogor Permata. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- CORE CBT & ADAPTIVE ENGINE SCRIPT -->
+  <script>
+    "use strict";
+
+    /**
+     * ============================================================================
+     * KONFIGURASI PERIODE UJIAN & ENDPOINT GOOGLE APPS SCRIPT
+     * ============================================================================
+     * Catatan Pengajar:
+     * Ubah ENABLE_DEADLINE menjadi false apabila ingin melakukan uji coba di luar
+     * rentang tanggal 16 - 22 November 2026.
+     */
+    const EXAM_CONFIG = {
+      ENABLE_DEADLINE: true,
+      START_TIME: "2026-11-12T00:00:00+07:00",
+      END_TIME: "2026-11-22T23:59:59+07:00"
+    };
+
+    const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyBuprE3UToDqmbukJhPDuBUfwg8dRZbov54uj3c9pwvsf4cUHIlb50GXwYocHD35ltzQ/exec";
+
+    /**
+     * ============================================================================
+     * KONFIGURASI BAGIAN ADAPTIF TAHAP 1 (BAGIAN A - J)
+     * ============================================================================
+     */
+    const STAGE1_SECTIONS = [
+      { code: "A", title: "Bagian A: Morfologi (Kelas Kata)", minId: 1, maxId: 7, startId: 4, duration: 30 },
+      { code: "B", title: "Bagian B: Morfologi (Pembentukan Kata)", minId: 8, maxId: 14, startId: 12, duration: 30 },
+      { code: "C", title: "Bagian C: Semantik (Makna & Relasi Kata)", minId: 15, maxId: 21, startId: 18, duration: 30 },
+      { code: "D", title: "Bagian D: Satuan Frasa & Hukum D-M", minId: 22, maxId: 28, startId: 24, duration: 50 },
+      { code: "E", title: "Bagian E: Konjungsi Intrakalimat & Antarkalimat", minId: 29, maxId: 35, startId: 32, duration: 50 },
+      { code: "F", title: "Bagian F: Struktur Tata Kalimat", minId: 36, maxId: 42, startId: 36, duration: 50 },
+      { code: "G", title: "Bagian G: Kalimat Efektif", minId: 43, maxId: 49, startId: 43, duration: 60 },
+      { code: "H", title: "Bagian H: Kaidah Ejaan (EYD V)", minId: 50, maxId: 56, startId: 50, duration: 60 },
+      { code: "I", title: "Bagian I: Penalaran Hubungan Kata (Analogi)", minId: 57, maxId: 63, startId: 61, duration: 75 },
+      { code: "J", title: "Bagian J: Bahasa Artifisial", minId: 64, maxId: 70, startId: 68, duration: 75 }
+    ];
+
+    /**
+     * ============================================================================
+     * BANK DATA SOAL TAHAP 1 (70 SOAL PENGUATAN KONSEP BAHASA INDONESIA)
+     * ============================================================================
+     */
+    const STAGE1_QUESTIONS = [
+      // BAGIAN A (1-7)
+      {
+        id: 1,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kelompok kata di bawah ini yang seluruhnya merupakan kata benda (nomina) adalah...",
+        options: {
+          A: "Meja, bersih, udara",
+          B: "Lemari, pensil, oksigen",
+          C: "Menulis, gedung, tanah",
+          D: "Buku, sangat, jalan",
+          E: "Pintu, tinggi, air"
+        },
+        answer: "B"
+      },
+      {
+        id: 2,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kata berikut yang berkedudukan sebagai kata kerja (verba) adalah...",
+        options: {
+          A: "Cepat",
+          B: "Senang",
+          C: "Sangat",
+          D: "Menari",
+          E: "Rajin"
+        },
+        answer: "D"
+      },
+      {
+        id: 3,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kelompok kata di bawah ini yang seluruhnya merupakan kata sifat (adjektiva) adalah...",
+        options: {
+          A: "Ramah, sunyi, sempit",
+          B: "Pandai, tidur, indah",
+          C: "Rumah, sejuk, kuat",
+          D: "Ragu, lari, gelap",
+          E: "Terang, pohon, manis"
+        },
+        answer: "A"
+      },
+      {
+        id: 4,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kata bercetak miring yang tergolong ke dalam kelas kata keterangan (adverbia) terdapat pada kalimat...",
+        options: {
+          A: "Dia membeli <em>baju</em> baru kemarin.",
+          B: "Mereka <em>berlari</em> mengelilingi lapangan.",
+          C: "Kamar tidur itu sangat <em>rapi</em>.",
+          D: "Kucing itu tidur di <em>bawah</em> kursi.",
+          E: "Kami <em>pasti</em> menyelesaikan tugas ini tepat waktu."
+        },
+        answer: "E"
+      },
+      {
+        id: 5,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kata yang berfungsi sebagai kata bilangan (numeralia) terdapat pada kalimat...",
+        options: {
+          A: "Mereka berjalan santai menyusuri trotoar jalan.",
+          B: "Pemandangan pegunungan itu terlihat sangat elok.",
+          C: "Ayah membeli tiga keranjang buah apel segar.",
+          D: "Kakak sedang memasak sayur lodeh di dapur.",
+          E: "Surat pemberitahuan tersebut dikirim melalui pos kilat."
+        },
+        answer: "C"
+      },
+      {
+        id: 6,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kata bercetak miring yang berkedudukan sebagai kata ganti (pronomina) persona terdapat pada kalimat...",
+        options: {
+          A: "Petugas kebersihan menyapu halaman dengan <em>sapu</em>.",
+          B: "Setelah berdiskusi panjang, <em>mereka</em> akhirnya mencapai kata sepakat.",
+          C: "Udara di lereng pegunungan terasa sangat <em>segar</em>.",
+          D: "Kakak <em>sedang</em> merapikan deretan buku di lemari.",
+          E: "Paman memelihara <em>lima</em> ekor ayam bangkok di pekarangan."
+        },
+        answer: "B"
+      },
+      {
+        id: 7,
+        section: "A",
+        topic: "Morfologi (Kelas Kata)",
+        text: "Kata bercetak miring yang berfungsi sebagai kata depan (preposisi) terdapat pada kalimat...",
+        options: {
+          A: "Dia tetap bersemangat <em>meskipun</em> tubuhnya lelah.",
+          B: "Adik <em>sangat</em> gembira menerima kiriman hadiah ulang tahun.",
+          C: "Ayah baru saja berangkat <em>ke</em> kantor menaiki kereta rel listrik.",
+          D: "Kami <em>sudah</em> membersihkan ruang laboratorium biologi.",
+          E: "Burung kenari itu berkicau <em>merdu</em> di atas dahan pohon."
+        },
+        answer: "C"
+      },
+
+      // BAGIAN B (8-14)
+      {
+        id: 8,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Kata dasar dari bentuk kata berimbuhan <em>mempertanggungjawabkan</em> adalah...",
+        options: {
+          A: "Tanggung jawab",
+          B: "Tanggung",
+          C: "Pertanggung",
+          D: "Jawab",
+          E: "Bertanggung"
+        },
+        answer: "A"
+      },
+      {
+        id: 9,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Bentuk kata berimbuhan <em>ber-</em> yang menyatakan makna \"memiliki\" terdapat pada kalimat...",
+        options: {
+          A: "Para siswa berlari cepat menuju gerbang sekolah.",
+          B: "Nelayan itu berlayar ke tengah lautan lepas.",
+          C: "Pengusaha muda itu beruang banyak dan dermawan.",
+          D: "Kedua sahabat karib itu bersalaman dengan erat.",
+          E: "Adik bergembira menyambut kepulangan paman."
+        },
+        answer: "C"
+      },
+      {
+        id: 10,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Bentuk kata berimbuhan <em>me-kan</em> yang menyatakan makna \"membuat menjadi\" terdapat pada kalimat...",
+        options: {
+          A: "Ibu membelikan adik sepatu sekolah baru.",
+          B: "Paman membawakan oleh-oleh khas dari desa.",
+          C: "Polisi menyeberangkan anak sekolah di jalan raya.",
+          D: "Kakak melemparkan bola ke dalam keranjang basket.",
+          E: "Ayah meninggikan pagar halaman rumah demi keamanan."
+        },
+        answer: "E"
+      },
+      {
+        id: 11,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Bentuk kata berimbuhan <em>pe-an</em> yang menyatakan makna \"proses\" terdapat pada kalimat...",
+        options: {
+          A: "Pameran lukisan itu diadakan di pekarangan gedung seni.",
+          B: "Pembangunan jembatan gantung itu memakan waktu enam bulan.",
+          C: "Rombongan pendaki berteduh di sebuah penginapan kayu.",
+          D: "Area pemakaman umum tersebut terletak di perbatasan desa.",
+          E: "Pangkalan ojek pangkalan itu selalu ramai setiap pagi."
+        },
+        answer: "B"
+      },
+      {
+        id: 12,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Bentuk kata turunan berawalan <em>me-</em> yang tepat menurut kaidah peluluhan bunyi adalah...",
+        options: {
+          A: "Mempesona",
+          B: "Mensucikan",
+          C: "Mengkristal",
+          D: "Memedulikan",
+          E: "Mentargetkan"
+        },
+        answer: "D"
+      },
+      {
+        id: 13,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Bentuk kata berimbuhan <em>ter-</em> yang menyatakan makna \"paling\" terdapat pada kalimat...",
+        options: {
+          A: "Menara itu merupakan bangunan tertinggi di kawasan ibu kota.",
+          B: "Pintu gerbang utama tertutup rapat saat malam tiba.",
+          C: "Dompet kulit milik paman tertinggal di atas meja kasir.",
+          D: "Suara sirine ambulans terdengar jelas dari kejauhan.",
+          E: "Beban berat itu akhirnya terangkat oleh regu penyelamat."
+        },
+        answer: "A"
+      },
+      {
+        id: 14,
+        section: "B",
+        topic: "Morfologi (Pembentukan Kata)",
+        text: "Penulisan bentuk terikat yang tepat menurut kaidah ejaan baku terdapat pada kalimat...",
+        options: {
+          A: "Turnamen sepak bola antar sekolah diselenggarakan pekan depan.",
+          B: "Pemerintah membagikan bibit unggul masa pasca panen.",
+          C: "Wilayah perkotaan itu dihuni sebagian masyarakat tuna wisma.",
+          D: "Fasilitas jalan tol menghubungkan jalur transportasi antarkota.",
+          E: "Komoditas ekspor non migas mengalami peningkatan nilai jual."
+        },
+        answer: "D"
+      },
+
+      // BAGIAN C (15-21)
+      {
+        id: 15,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Kata <em>gelap</em> yang digunakan dalam makna kiasan (konotatif) terdapat pada kalimat...",
+        options: {
+          A: "Kamar tidur menjadi <em>gelap</em> gulita saat aliran listrik padam.",
+          B: "Malam semakin larut dan keadaan jalanan terasa <em>gelap</em>.",
+          C: "Masa depan pemuda yang gemar berjudi itu tampak <em>gelap</em>.",
+          D: "Ruang bawah tanah itu <em>gelap</em> karena tidak berpintu kaca.",
+          E: "Langit mendung tampak <em>gelap</em> menandakan hujan segera tiba."
+        },
+        answer: "C"
+      },
+      {
+        id: 16,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Pasangan kata berikut yang memiliki hubungan pertentangan makna (antonim) adalah...",
+        options: {
+          A: "Hampa - Kosong",
+          B: "Paras - Wajah",
+          C: "Getir - Pahit",
+          D: "Gemar - Hobi",
+          E: "Fana - Abadi"
+        },
+        answer: "E"
+      },
+      {
+        id: 17,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Kata <em>kepala</em> yang bermakna \"pemimpin\" terdapat pada kalimat...",
+        options: {
+          A: "<em>Kepala</em> sekolah menyampaikan amanat pada upacara bendera.",
+          B: "Adik menganggukkan <em>kepala</em> tanda memahami penjelasan guru.",
+          C: "Bagian <em>kepala</em> surat itu memuat lambang resmi yayasan.",
+          D: "Rambut di area <em>kepala</em>nya mulai memutih termakan usia.",
+          E: "Rangkaian kereta api tersebut ditarik dua <em>kepala</em> lokomotif."
+        },
+        answer: "A"
+      },
+      {
+        id: 18,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Bentuk kata ulang yang menyatakan makna \"menyerupai atau tiruan\" terdapat pada kalimat...",
+        options: {
+          A: "Kupu-kupu beterbangan riang di antara rimbun bunga.",
+          B: "Rumah-rumah penduduk di bantaran sungai tertata rapi.",
+          C: "Dua pengendara motor itu bersenggol-senggolan di tikungan.",
+          D: "Petani memasang orang-orangan di tengah sawah untuk mengusir burung.",
+          E: "Gadis berpita merah itu tersenyum malu-malu saat disapa."
+        },
+        answer: "D"
+      },
+      {
+        id: 19,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Kata bercetak miring yang mengalami penghalusan makna (ameliorasi) terdapat pada kalimat...",
+        options: {
+          A: "Komplotan <em>pencuri</em> motor itu diringkus aparat semalam.",
+          B: "Lembaga sosial menyalurkan bantuan kepada para penyandang <em>tunanetra</em>.",
+          C: "Pihak manajemen mencari <em>kambing hitam</em> atas kegagalan proyek.",
+          D: "Petani mengeluhkan kenaikan harga <em>pupuk</em> subsidi saat ini.",
+          E: "Rumah panggung itu ludes dilalap <em>si jago merah</em>."
+        },
+        answer: "B"
+      },
+      {
+        id: 20,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Pasangan kata berikut yang memiliki hubungan persamaan makna (sinonim) adalah...",
+        options: {
+          A: "Khianat - Setia",
+          B: "Statis - Dinamis",
+          C: "Asa - Harapan",
+          D: "Subur - Tandus",
+          E: "Maya - Nyata"
+        },
+        answer: "C"
+      },
+      {
+        id: 21,
+        section: "C",
+        topic: "Semantik (Makna & Relasi Kata)",
+        text: "Kata bercetak miring yang mengalami penurunan nilai rasa (peyorasi) terdapat pada kalimat...",
+        options: {
+          A: "Polisi berhasil membubarkan <em>gerombolan</em> pembuat onar semalam.",
+          B: "Lembaga sosial merawat para <em>lansia</em> di panti wreda.",
+          C: "Pihak kepolisian memeriksa <em>saksi</em> kunci di kantor kejaksaan.",
+          D: "Ayah mendampingi paman berobat ke <em>dokter</em> spesialis mata.",
+          E: "Petugas melayani kebutuhan para penyandang <em>disabilitas</em>."
+        },
+        answer: "A"
+      },
+
+      // BAGIAN D (22-28)
+      {
+        id: 22,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Kelompok kata berikut yang susunannya mematuhi hukum Diterangkan-Menerangkan (D-M) adalah...",
+        options: {
+          A: "Sangat cepat",
+          B: "Sedang makan",
+          C: "Baru datang",
+          D: "Amat luas",
+          E: "Meja bundar"
+        },
+        answer: "E"
+      },
+      {
+        id: 23,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Kelompok kata berikut yang susunannya menyalahi kaidah hukum Diterangkan-Menerangkan $(D-M)$ adalah...",
+        options: {
+          A: "Sepeda motor",
+          B: "Perdana menteri",
+          C: "Rumah makan",
+          D: "Kereta cepat",
+          E: "Lemari kayu"
+        },
+        answer: "B"
+      },
+      {
+        id: 24,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Perhatikan frasa berikut!<br><em>\"buku cerita bergambar karya pengarang terkenal itu\"</em><br>Unsur inti dari frasa di atas adalah...",
+        options: {
+          A: "cerita",
+          B: "bergambar",
+          C: "buku",
+          D: "pengarang",
+          E: "terkenal"
+        },
+        answer: "C"
+      },
+      {
+        id: 25,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Frasa berikut yang kedua unsurnya berkedudukan setara (koordinatif) adalah...",
+        options: {
+          A: "Tua muda",
+          B: "Rumah mewah",
+          C: "Buku baru",
+          D: "Gunung tinggi",
+          E: "Jalan raya"
+        },
+        answer: "A"
+      },
+      {
+        id: 26,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Frasa bercetak miring yang bermakna idiomatis (ungkapan kias) terdapat pada kalimat...",
+        options: {
+          A: "Ibu meletakkan mangkuk <em>sup panas</em> di atas meja makan.",
+          B: "Kami bepergian menuju Yogyakarta menaiki <em>kereta api</em>.",
+          C: "Kakak mengenakan <em>sepatu kulit</em> hitam saat pergi bekerja.",
+          D: "Perselisihan warga diselesaikan secara damai lewat <em>kepala dingin</em>.",
+          E: "Paman membeli seekor <em>kambing jantan</em> untuk kurban."
+        },
+        answer: "D"
+      },
+      {
+        id: 27,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Kelompok kata di bawah ini yang seluruhnya berkategori sebagai frasa nomina (frasa benda) adalah...",
+        options: {
+          A: "Sangat pandai, amat luas, luar biasa cepat",
+          B: "Sedang menulis, sudah datang, akan pergi",
+          C: "Di dalam lemari, ke arah barat, dari sekolah",
+          D: "Tidak pernah, selalu ada, tentu bisa",
+          E: "Lemari jati, sepatu olahraga, rumah kayu"
+        },
+        answer: "E"
+      },
+      {
+        id: 28,
+        section: "D",
+        topic: "Satuan Frasa & Hukum D-M",
+        text: "Frasa berikut yang unsur penjelasnya mendahului unsur intinya (berpola M-D) adalah...",
+        options: {
+          A: "Baju baru",
+          B: "Seekor kucing",
+          C: "Jam dinding",
+          D: "Mobil sedan",
+          E: "Ruang tamu"
+        },
+        answer: "B"
+      },
+
+      // BAGIAN E (29-35)
+      {
+        id: 29,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Konjungsi berikut yang berfungsi menghubungkan kalimat dengan kalimat sebelumnya (antarkalimat) dan wajib diikuti tanda koma di awal kalimat adalah...",
+        options: {
+          A: "Dan",
+          B: "Karena",
+          C: "Sedangkan",
+          D: "Oleh karena itu",
+          E: "Tetapi"
+        },
+        answer: "D"
+      },
+      {
+        id: 30,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Pasangan konjungsi korelatif yang tepat penggunaannya terdapat pada kalimat...",
+        options: {
+          A: "Baik siswa baru maupun siswa lama wajib mematuhi aturan sekolah.",
+          B: "Bukan hanya tekun, tetapi dia juga memiliki bakat luar biasa.",
+          C: "Antara ayah dengan paman sudah lama tidak saling mengunjungi.",
+          D: "Tidak hanya pintar, melainkan juga memiliki tata krama santun.",
+          E: "Sedemikian rupa sehingga masalah itu terselesaikan dengan tuntas."
+        },
+        answer: "A"
+      },
+      {
+        id: 31,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Kalimat yang paling tepat dilengkapi dengan konjungsi subordinatif bersyarat \"apabila\" adalah...",
+        options: {
+          A: "Adik menangis tersedu-sedu ... mainan kesayangannya rusak.",
+          B: "Ayah bergegas berangkat ... fajar belum sepenuhnya menyingsing.",
+          C: "Kamu akan meraih peringkat pertama ... kamu belajar secara konsisten.",
+          D: "Regu kami tetap melanjutkan perjalanan ... kabut tebal menyelimuti bukit.",
+          E: "Kakak memadamkan lampu belajar ... hendak memejamkan mata."
+        },
+        answer: "C"
+      },
+      {
+        id: 32,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Penggunaan konjungsi pada awal kalimat mandiri yang salah terdapat pada kalimat...",
+        options: {
+          A: "Namun, kesepakatan akhir tersebut belum ditandatangani para pihak.",
+          B: "Sehingga banyak warga mengungsi ke tempat penampungan sementara.",
+          C: "Oleh sebab itu, kita harus menghemat penggunaan air bersih.",
+          D: "Selain itu, para relawan juga membagikan pakaian hangat.",
+          E: "Akan tetapi, semangat juang para atlet tidak pernah padam."
+        },
+        answer: "B"
+      },
+      {
+        id: 33,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Kalimat berikut yang memuat penggunaan konjungsi pertentangan \"sedangkan\" secara tepat adalah...",
+        options: {
+          A: "Ayah ingin membeli sepeda motor, sedangkan tabungannya belum cukup.",
+          B: "Adik merasa sangat lapar, sedangkan ia tidak mau menyentuh nasi.",
+          C: "Tubuh olahragawan itu lelah, sedangkan semangatnya tetap berkobar.",
+          D: "Hawa siang ini terasa panas, sedangkan angin berembus sepoi-sepoi.",
+          E: "Rina gemar membaca buku sains, sedangkan kakaknya menekuni seni tari."
+        },
+        answer: "E"
+      },
+      {
+        id: 34,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Kalimat yang paling tepat dilengkapi dengan konjungsi tujuan \"agar\" atau \"supaya\" adalah...",
+        options: {
+          A: "Kami tidak dapat hadir tepat waktu ... jalanan tergenang air banjir.",
+          B: "Ayah tetap berangkat dinas ... kondisi tubuhnya sedang kurang sehat.",
+          C: "Para atlet berlatih keras ... mampu mengharumkan nama bangsa.",
+          D: "Adik menangis kencang ... mainan mobil kesayangannya terjatuh.",
+          E: "Rombongan beristirahat sejenak ... menempuh perjalanan cukup jauh."
+        },
+        answer: "C"
+      },
+      {
+        id: 35,
+        section: "E",
+        topic: "Konjungsi Intrakalimat & Antarkalimat",
+        text: "Perhatikan kutipan wacana rumpang berikut!<br><em>\"Tim penyelamat telah berusaha menyisir seluruh sudut lembah. [...], kabut tebal memaksa pencarian dihentikan sementara.\"</em><br>Konjungsi antarkalimat penanda pertentangan yang paling tepat untuk mengisi bagian rumpang adalah...",
+        options: {
+          A: "Selain itu",
+          B: "Bahkan",
+          C: "Akibatnya",
+          D: "Akan tetapi",
+          E: "Oleh karena itu"
+        },
+        answer: "D"
+      },
+
+      // BAGIAN F (36-42)
+      {
+        id: 36,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Perhatikan kalimat berikut!<br><em>\"Di ruang perpustakaan siswa kelas dua belas sedang membaca buku sejarah.\"</em><br>Subjek dari kalimat tersebut adalah...",
+        options: {
+          A: "Di ruang perpustakaan",
+          B: "Siswa kelas dua belas",
+          C: "Sedang membaca",
+          D: "Buku sejarah",
+          E: "Sejarah"
+        },
+        answer: "B"
+      },
+      {
+        id: 37,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Perhatikan kalimat berikut!<br><em>\"Para petani di lereng bukit itu memanen sayuran segar kemarin pagi.\"</em><br>Predikat dari kalimat di atas adalah...",
+        options: {
+          A: "Para petani",
+          B: "Di lereng bukit itu",
+          C: "Sayuran segar",
+          D: "Memanen",
+          E: "Kemarin pagi"
+        },
+        answer: "D"
+      },
+      {
+        id: 38,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Unsur yang berkedudukan sebagai pelengkap (bukan objek) terdapat pada kalimat...",
+        options: {
+          A: "Negara Indonesia berlandaskan hukum.",
+          B: "Ibu memasak rendang daging sapi.",
+          C: "Petani membajak sawah tadah hujan.",
+          D: "Ayah membelikan adik buku dongeng.",
+          E: "Polisi memeriksa surat izin mengemudi."
+        },
+        answer: "A"
+      },
+      {
+        id: 39,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Perhatikan kalimat berikut!<br><em>\"Pemerintah kota meresmikan jembatan penyeberangan baru kemarin lusa.\"</em><br>Bentuk pasif yang tepat dari kalimat di atas adalah...",
+        options: {
+          A: "Jembatan penyeberangan baru meresmikan pemerintah kota kemarin lusa.",
+          B: "Diresmikan kemarin lusa jembatan penyeberangan baru oleh kota.",
+          C: "Pemerintah kota diresmikan oleh jembatan penyeberangan baru.",
+          D: "Kemarin lusa peresmian jembatan penyeberangan baru dilaksanakan.",
+          E: "Jembatan penyeberangan baru diresmikan oleh pemerintah kota kemarin lusa."
+        },
+        answer: "E"
+      },
+      {
+        id: 40,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Kalimat berikut yang memiliki pola fungsi dasar yang sama dengan kalimat <em>\"Polisi lalu lintas menertibkan pengendara motor di perempatan jalan\"</em> adalah...",
+        options: {
+          A: "Burung camar terbang melayang di atas laut lepas.",
+          B: "Dokter spesialis itu sedang memeriksa denyut jantung pasien.",
+          C: "Paman menebang pohon kelapa di samping rumah.",
+          D: "Mereka belajar kelompok dengan sungguh-sungguh setiap malam.",
+          E: "Paman saya adalah seorang dokter hewan yang berpengalaman."
+        },
+        answer: "C"
+      },
+      {
+        id: 41,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Kalimat berikut yang memiliki pola fungsi Subjek - Predikat - Pelengkap (S-P-Pel) adalah...",
+        options: {
+          A: "Tubuh atlet maraton itu berlumuran keringat.",
+          B: "Polisi menangkap pelaku pencurian di stasiun.",
+          C: "Burung elang terbang melayang di angkasa.",
+          D: "Dokter spesialis memeriksa kondisi kesehatan pasien.",
+          E: "Ibu memasak sayur asem di dapur."
+        },
+        answer: "A"
+      },
+      {
+        id: 42,
+        section: "F",
+        topic: "Struktur Tata Kalimat",
+        text: "Unsur bercetak miring yang menduduki fungsi sebagai objek penderita dalam kalimat adalah...",
+        options: {
+          A: "Para petani beristirahat <em>di bawah pohon rindang</em>.",
+          B: "Pertunjukan seni tradisional itu berlangsung <em>sangat meriah</em>.",
+          C: "Negara kepulauan ini berdasarkan <em>atas hukum</em>.",
+          D: "Kereta cepat melaju kencang <em>menuju stasiun akhir</em>.",
+          E: "Petugas memeriksa <em>tanda pengenal</em> pengunjung di pintu masuk."
+        },
+        answer: "E"
+      },
+
+      // BAGIAN G (43-49)
+      {
+        id: 43,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Pernyataan di bawah ini yang bukan merupakan kalimat lengkap karena kehilangan unsur predikat adalah...",
+        options: {
+          A: "Gedung pencakar langit yang baru diresmikan di pusat kota itu.",
+          B: "Gedung pencakar langit itu baru saja diresmikan di pusat kota.",
+          C: "Pemerintah meresmikan gedung pencakar langit di pusat kota.",
+          D: "Di pusat perkotaan berdiri megah sebuah gedung pencakar langit.",
+          E: "Peresmian gedung pencakar langit itu berlangsung dengan tertib."
+        },
+        answer: "A"
+      },
+      {
+        id: 44,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat berikut yang strukturnya rancu karena kehilangan subjek adalah...",
+        options: {
+          A: "Mahasiswa baru mengikuti masa pengenalan lingkungan kampus.",
+          B: "Di laboratorium para siswa menguji kandungan asam zat cair.",
+          C: "Untuk seluruh warga desa wajib membersihkan saluran air mandiri.",
+          D: "Surat edaran resmi telah disebarkan panitia sejak pekan lalu.",
+          E: "Guru membagikan lembar kerja kepada para peserta didik."
+        },
+        answer: "C"
+      },
+      {
+        id: 45,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat berikut yang terbebas dari pemborosan kata (pleonasme) adalah...",
+        options: {
+          A: "Warga masyarakat saling tolong-menolong membersihkan selokan.",
+          B: "Para hadirin sekalian dipersilakan menempati barisan depan.",
+          C: "Burung elang itu melayang membubung naik ke atas langit.",
+          D: "Guru itu kembali mengulang keterangannya dari awal kembali.",
+          E: "Semua peserta wajib membawa pensil berkode 2B saat ujian."
+        },
+        answer: "E"
+      },
+      {
+        id: 46,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat yang memenuhi kaidah kesejajaran bentuk (paralelisme) adalah...",
+        options: {
+          A: "Langkah mitigasi meliputi pemetaan zona, memberi peringatan, dan relokasi.",
+          B: "Panitia bertugas mendata peserta, membagikan modul, dan mengawasi ujian.",
+          C: "Ibu gemar menyiram bunga, mencabut rumput liar, dan pemupukan pot.",
+          D: "Rencana kerja mencakup penyusunan anggaran, melatih staf, dan pengawasan.",
+          E: "Petugas merapikan meja, menyapu karpet, dan sampah dibuang keluar."
+        },
+        answer: "B"
+      },
+      {
+        id: 47,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat berikut yang nalar semantiknya tidak logis adalah...",
+        options: {
+          A: "Pihak pengelola menambah jumlah loket tiket untuk mengurai antrean.",
+          B: "Regu penyelamat berhasil mengevakuasi korban longsor di perbukitan.",
+          C: "Dokter memberikan resep obat kepada pasien setelah pemeriksaan selesai.",
+          D: "Waktu dan tempat kami persilakan kepada bapak kepala dinas.",
+          E: "Sopir menghentikan laju kendaraannya saat lampu merah menyala."
+        },
+        answer: "D"
+      },
+      {
+        id: 48,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat berikut yang strukturnya rancu akibat penggunaan konjungsi ganda secara bersamaan adalah...",
+        options: {
+          A: "Meskipun cuaca buruk, kapal penyeberangan tetap berlayar hati-hati.",
+          B: "Karena terlambat bangun, adik tergesa-gesa menuju halte bus.",
+          C: "Jika persiapan matang, hasil pertandingan pasti akan maksimal.",
+          D: "Walaupun sudah berusaha keras, ia tetap berlapang dada menerima hasil.",
+          E: "Meskipun hujan turun lebat, namun para relawan tetap membagikan logistik."
+        },
+        answer: "E"
+      },
+      {
+        id: 49,
+        section: "G",
+        topic: "Kalimat Efektif",
+        text: "Kalimat berikut yang efektif dan terbebas dari pemborosan penggunaan kata <em>saling</em> adalah...",
+        options: {
+          A: "Kedua pemuda itu saling memandang saat berpapasan di lorong.",
+          B: "Warga masyarakat saling tolong-menolong membangun pos ronda.",
+          C: "Para pejuang saling baku-tembak di medan pertempuran terbuka.",
+          D: "Anggota rapat saling bersalam-salaman seusai acara berakhir.",
+          E: "Kedua petinju saling pukul-memukul di atas panggung ring."
+        },
+        answer: "A"
+      },
+
+      // BAGIAN H (50-56)
+      {
+        id: 50,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penulisan kata depan atau awalan <em>di</em> yang salah terdapat pada kalimat...",
+        options: {
+          A: "Arsip berharga tersebut disimpan rapi di lemari besi kantor.",
+          B: "Ayah membuka bengkel reparasi kendaraan di pinggir jalan raya.",
+          C: "Pakaian bersih itu direndam didalam ember sebelum dibilas tuntas.",
+          D: "Buku cetak milik adik tertinggal di atas meja ruang keluarga.",
+          E: "Naskah perjanjian itu sudah ditandatangani kedua pimpinan lembaga."
+        },
+        answer: "C"
+      },
+      {
+        id: 51,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penulisan huruf kapital nama diri geografi yang tepat menurut kaidah EYD V terdapat pada kalimat...",
+        options: {
+          A: "Kapal feri menyeberangi selat Sunda menuju pelabuhan Bakauheni.",
+          B: "Paman membawakan oleh-oleh gula Jawa dan kacang Bogor asli.",
+          C: "Kami mengagumi pesona Danau toba yang tampak berkabut pagi ini.",
+          D: "Jalur pendakian Gunung merapi ditutup sementara akibat erupsi.",
+          E: "Para turis menikmati pemandangan senja di Pantai Kuta."
+        },
+        answer: "E"
+      },
+      {
+        id: 52,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penggunaan huruf kapital pada kata sapaan langsung yang tepat terdapat pada kalimat...",
+        options: {
+          A: "Kami berlibur ke rumah Paman yang berada di luar daerah.",
+          B: "\"Kapan Ibu akan kembali dari kunjungan dinas?\" tanya sekretaris.",
+          C: "Setiap anak berkewajiban membahagiakan kedua Orang Tua mereka.",
+          D: "Kemarin Ayah saya membelikan kamus bahasa asing untuk kakak.",
+          E: "Tenaga medis memantau keadaan Pasien di ruang perawatan intensif."
+        },
+        answer: "B"
+      },
+      {
+        id: 53,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penggunaan tanda koma (,) yang tepat dalam perincian serial terdapat pada kalimat...",
+        options: {
+          A: "Ibu berbelanja wortel, tomat dan kol di lapak sayur segar.",
+          B: "Ayah memerlukan semen, pasir, dan paku, untuk dinding pembatas.",
+          C: "Toko itu menjual buku gambar pensil warna, dan jangka sorong.",
+          D: "Regu pengakap membawa kompas, peta topografi, dan tenda dome.",
+          E: "Siswa membawa penggaris, pensil, penghapus ke ruang pertemuan."
+        },
+        answer: "D"
+      },
+      {
+        id: 54,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penggunaan tanda koma yang tepat pada kalimat majemuk bertingkat terdapat pada kalimat...",
+        options: {
+          A: "Jika hari esok tidak hujan deras, kami akan berkemah di lereng gunung.",
+          B: "Kami akan berkemah di lereng gunung, jika hari esok tidak hujan deras.",
+          C: "Walaupun telah berlatih keras, tetapi mereka belum keluar sebagai juara.",
+          D: "Karena terjadi kemacetan panjang, sehingga mobil ambulans terlambat tiba.",
+          E: "Agar memperoleh nilai sempurna, maka Budi mengulang seluruh materi."
+        },
+        answer: "A"
+      },
+      {
+        id: 55,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penggunaan tanda titik dua (:) yang tepat menurut kaidah EYD V terdapat pada kalimat...",
+        options: {
+          A: "Kami memerlukan: meja, kursi, dan lemari arsip baru.",
+          B: "Ayah membeli bahan pokok seperti: beras, gula, dan minyak goreng.",
+          C: "Rombongan pengawas terdiri atas: guru, kepala sekolah, dan komite.",
+          D: "Toko alat tulis menyediakan perlengkapan sekolah: buku tulis, pensil 2B, dan jangka.",
+          E: "Fasilitas belajar yang tersedia yaitu: musala, perpustakaan, dan laboratorium."
+        },
+        answer: "D"
+      },
+      {
+        id: 56,
+        section: "H",
+        topic: "Kaidah Ejaan (EYD V)",
+        text: "Penulisan gabungan kata berimbuhan yang tepat menurut kaidah EYD V terdapat pada kalimat...",
+        options: {
+          A: "Kedua belah pihak sepakat untuk tanda tangani berkas kemitraan tersebut.",
+          B: "Pejabat kementerian menandatangani nota kesepahaman bilateral.",
+          C: "Perusahaan wajib mem pertanggung jawabkan alokasi dana bantuan sosial.",
+          D: "Pemerintah daerah berupaya melipat gandakan penerimaan sektor pariwisata.",
+          E: "Petugas tata usaha sedang mem fotokopi lembar soal asesmen daerah."
+        },
+        answer: "B"
+      },
+
+      // BAGIAN I (57-63)
+      {
+        id: 57,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "JARUM : MENJAHIT = PISAU : ...",
+        options: {
+          A: "Dapur",
+          B: "Logam",
+          C: "Tajam",
+          D: "Asahan",
+          E: "Memotong"
+        },
+        answer: "E"
+      },
+      {
+        id: 58,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "DAUN : POHON = KELOPAK : ...",
+        options: {
+          A: "Batang",
+          B: "Bunga",
+          C: "Buah",
+          D: "Ranting",
+          E: "Akar"
+        },
+        answer: "B"
+      },
+      {
+        id: 59,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "KEMARAU : KEKERINGAN $= HUJAN$ : ...",
+        options: {
+          A: "Air",
+          B: "Badai",
+          C: "Payung",
+          D: "Banjir",
+          E: "Mendung"
+        },
+        answer: "D"
+      },
+      {
+        id: 60,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "NAKHODA : KAPAL = MASINIS : ...",
+        options: {
+          A: "Kereta api",
+          B: "Rel",
+          C: "Stasiun",
+          D: "Terminal",
+          E: "Gerbong"
+        },
+        answer: "A"
+      },
+      {
+        id: 61,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "ELANG : BURUNG = PAUS : ...",
+        options: {
+          A: "Ikan",
+          B: "Laut",
+          C: "Mamalia",
+          D: "Bernapas",
+          E: "Predator"
+        },
+        answer: "C"
+      },
+      {
+        id: 62,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "KOMPONIS : LAGU = PENULIS : ...",
+        options: {
+          A: "Pena",
+          B: "Kertas",
+          C: "Novel",
+          D: "Membaca",
+          E: "Perpustakaan"
+        },
+        answer: "C"
+      },
+      {
+        id: 63,
+        section: "I",
+        topic: "Penalaran Hubungan Kata (Analogi)",
+        text: "KAYU : MEJA = GANDUM : ...",
+        options: {
+          A: "Ladang",
+          B: "Roti",
+          C: "Tepung",
+          D: "Petani",
+          E: "Karung"
+        },
+        answer: "B"
+      },
+
+      // BAGIAN J (64-70)
+      {
+        id: 64,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan sistem bahasa buatan berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>lompo kima = apel manis<br>lompo rati = apel asam<br>salo kima = mangga manis</div>Berdasarkan perbandingan makna di atas, kata yang berarti \"asam\" adalah...",
+        options: {
+          A: "lompo",
+          B: "kima",
+          C: "salo",
+          D: "rati",
+          E: "rati kima"
+        },
+        answer: "D"
+      },
+      {
+        id: 65,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan pola bahasa buatan yang menerapkan urutan kata Menerangkan-Diterangkan berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>blu book = buku biru<br>red car = mobil merah<br>green bag = tas hijau</div>Jika kata \"topi\" adalah <em>hat</em> dan kata \"kuning\" adalah <em>yel</em>, maka terjemahan bahasa buatan untuk \"topi kuning\" adalah...",
+        options: {
+          A: "yel hat",
+          B: "hat yel",
+          C: "yel-k hat",
+          D: "hat-yel",
+          E: "p-hat yel"
+        },
+        answer: "A"
+      },
+      {
+        id: 66,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan data tata kata kode buatan berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>buku &rarr; sa-buku = sebuah buku<br>pena &rarr; sa-pena = sebuah pena<br>meja &rarr; sa-meja = sebuah meja<br>kursi &rarr; kursi</div>Berdasarkan keteraturan imbuhan di atas, bentuk kata kode untuk menyatakan \"sebuah kursi\" adalah...",
+        options: {
+          A: "kursi-sa",
+          B: "kursi-an",
+          C: "sa-kursi",
+          D: "ku-kursi",
+          E: "kursi-k"
+        },
+        answer: "C"
+      },
+      {
+        id: 67,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan data bahasa kode berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>makan &rarr; makan-vi = sudah makan<br>minum &rarr; minum-vi = sudah minum<br>tidur &rarr; tidur-vi = sudah tidur<br>baca &rarr; baca</div>Berdasarkan sistem tata bahasa buatan tersebut, kata untuk menyatakan makna \"sudah membaca\" adalah...",
+        options: {
+          A: "vi-baca",
+          B: "mem-baca",
+          C: "sa-baca",
+          D: "baca-an",
+          E: "baca-vi"
+        },
+        answer: "E"
+      },
+      {
+        id: 68,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan kalimat dalam bahasa artifisial sederhana berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>anok mori katu = kucing makan ikan<br>anok kado katu = anjing makan ikan<br>anok mori zapa = kucing makan daging</div>Berdasarkan sistem penyusunan kata di atas, terjemahan untuk kalimat \"anjing makan daging\" adalah...",
+        options: {
+          A: "anok mori zapa",
+          B: "anok kado zapa",
+          C: "kado anok zapa",
+          D: "zapa anok kado",
+          E: "anok zapa kado"
+        },
+        answer: "B"
+      },
+      {
+        id: 69,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan sistem bahasa buatan berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>luma = rumah &rarr; lu-luma = rumah-rumah<br>kuta = kota &rarr; ku-kuta = kota-kota<br>desa = desa &rarr; de-desa = desa-desa</div>Berdasarkan pola pembentukan bentuk jamak di atas, terjemahan untuk \"batu-batu\" jika kata batu adalah <em>batu</em> adalah...",
+        options: {
+          A: "batu-luma",
+          B: "ba-batu-an",
+          C: "sa-batu",
+          D: "ba-batu",
+          E: "batu-ku"
+        },
+        answer: "D"
+      },
+      {
+        id: 70,
+        section: "J",
+        topic: "Bahasa Artifisial",
+        text: "Perhatikan data bahasa artifisial berikut!<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 font-mono text-sm'>makan &rarr; no-makan = tidak makan<br>minum &rarr; no-minum = tidak minum<br>tidur &rarr; no-tidur = tidak tidur</div>Berdasarkan pola bahasa buatan di atas, bentuk kata untuk menyatakan \"tidak membaca\" dari kata dasar <em>baca</em> adalah...",
+        options: {
+          A: "baca-no",
+          B: "un-baca",
+          C: "anti-baca",
+          D: "sa-baca",
+          E: "no-baca"
+        },
+        answer: "E"
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * BANK DATA WACANA & SOAL TAHAP 2 (10 SOAL PPU - MAKNA KATA)
+     * ============================================================================
+     */
+    const STAGE2_PASSAGES = {
+      1: {
+        title: "WACANA 1 (Untuk Soal Nomor 1–4)",
+        paragraphs: [
+          "<strong>Paragraf 1</strong><br>Perkembangan pesat kecerdasan buatan generatif telah mengubah lanskap komunikasi dan produksi teks secara dramatis. Mesin tidak sekadar menyalin lambang linguistik, melainkan meramu korpus data raksasa guna menghasilkan narasi yang tampak bernas dan koheren. Namun, kemahiran algoritmik ini menyimpan bahaya laten berupa pereduksian nuansa semantis yang selama ini menjadi kekayaan batin manusia. Kata-kata yang diproduksi secara mekanis kerap kehilangan roh emotif dan kedalaman konteks budaya, tereduksi menjadi sekadar deretan probabilitas statistik yang dingin.",
+          "<strong>Paragraf 2</strong><br>Fenomena tersebut memicu kekhawatiran para linguis perihal inflasi makna dan disorientasi pemahaman di kalangan generasi muda. Ketika teks hampa rasa membanjiri ruang digital, kepekaan masyarakat dalam menangkap satire, ironi, serta metafora luhur perlahan mengalami degradasi. Oleh karena itu, kurikulum literasi kritis dituntut untuk membentengi nalar generasi muda agar mereka tidak pasif menelan informasi fabrikasi. Melalui penajaman daya tafsir, peserta didik diharapkan mampu membedakan kebenaran substantif dari kepalsuan yang dibungkus retorika semu."
+        ]
+      },
+      2: {
+        title: "WACANA 2 (Untuk Soal Nomor 5–7)",
+        paragraphs: [
+          "<strong>Paragraf 1</strong><br>Penelusuran silsilah populasi kepulauan Nusantara kini memperoleh lentera baru melalui pendekatan arkeogenetika. Rekonstruksi asam deoksiribonukleat (DNA) purba yang diekstraksi dari fosil tulang manusia prasejarah berhasil menyingkap tabir percampuran genetik yang sangat dinamis. Riset mutakhir membuktikan bahwa narasi gelombang migrasi tunggal nenek moyang bangsa Indonesia adalah penyederhanaan yang keliru. Sebaliknya, genom manusia Nusantara terbentuk dari anyaman silang berbagai garis keturunan populasi pemburu-peramu Austro-Melanesia dan gelombang penutur Austronesia yang datang belakangan.",
+          "<strong>Paragraf 2</strong><br>Temuan saintifik ini merombak konsepsi usang mengenai kemurnian ras yang kerap dijadikan instrumen politik segregasi. Keragaman genetik tersebut memperlihatkan bahwa adaptasi manusia kepulauan terhadap iklim tropis serta patogen lokal telah berlangsung selama ribuan tahun. Para antropolog menggarisbawahi bahwa kesadaran akan akar genetika yang majemuk justru memperkokoh jalinan integrasi sosial. Dengan demikian, semboyan kebinekaan bukan sekadar jargon politik, melainkan fakta biologis yang terpatri kokoh dalam cetak biru genetika anak bangsa."
+        ]
+      },
+      3: {
+        title: "WACANA 3 (Untuk Soal Nomor 8–10)",
+        paragraphs: [
+          "<strong>Paragraf 1</strong><br>Potensi biodiversitas laut Indonesia menyimpan harta karun molekuler yang belum banyak dieksplorasi secara optimal. Salah satu komoditas primadona yang kini menjadi sorotan saintifik adalah makroalga atau rumput laut tropis. Kandungan senyawa bioaktif pada dinding sel alga terbukti memiliki khasiat antioksidan, antivirus, dan antikanker yang sangat potensial bagi industri farmasi mandiri. Sayangnya, pemanfaatan alga selama ini masih terbelenggu pada ekspor bahan mentah berharga murah, tanpa sentuhan hilirisasi bioteknologi yang bernilai tambah tinggi.",
+          "<strong>Paragraf 2</strong><br>Ketergantungan industri obat domestik terhadap bahan baku impor yang mencapai 90% merupakan ironi besar bagi negara kepulauan terkaya di dunia. Para peneliti bioteknologi mendesak pemerintah agar memfasilitasi jembatan hilirisasi antara institusi riset dan korporasi farmasi nasional. Tanpa adanya injeksi modal ventura serta kebijakan proteksi paten yang tangguh, hasil laboratorium anak negeri hanya akan menjadi pajangan akademis belaka. Kedaulatan kesehatan bangsa di masa depan sangat ditentukan oleh keberanian memutus rantai pasok impor melalui penguasaan teknologi ekstraksi biomassa laut."
+        ]
+      }
+    };
+
+    const STAGE2_QUESTIONS = [
+      {
+        id: 1,
+        passageId: 1,
+        topic: "Makna Leksikal & Kontekstual",
+        duration: 90,
+        text: "Makna kata <em>bernas</em> pada klausa <em>\"menghasilkan narasi yang tampak bernas dan koheren\"</em> (Paragraf 1) dalam konteks wacana tersebut adalah...",
+        options: {
+          A: "Memiliki bentuk fisik yang padat dan berisi butiran penuh",
+          B: "Mengandung banyak istilah ilmiah yang sukar dipahami awam",
+          C: "Penuh dengan gagasan penting yang berbobot dan bermakna tajam",
+          D: "Tersusun secara logis mengikuti pola baku kaidah gramatikal",
+          E: "Bersifat orisinal serta terbebas dari saduran teks lain"
+        },
+        answer: "C"
+      },
+      {
+        id: 2,
+        passageId: 1,
+        topic: "Makna Konotatif & Nilai Rasa",
+        duration: 90,
+        text: "Kata <em>dingin</em> pada frasa <em>\"deretan probabilitas statistik yang dingin\"</em> (Paragraf 1) mengandung nilai rasa atau makna konotatif berupa...",
+        options: {
+          A: "Suhu udara yang rendah akibat operasional mesin peladen komputasi",
+          B: "Ketiadaan respons cepat dari sistem kecerdasan buatan terhadap instruksi",
+          C: "Sikap tenang dan tidak terburu-buru dalam menyajikan simpulan data",
+          D: "Pola algoritma yang bersifat matematis dan dapat dibuktikan secara eksak",
+          E: "Ketiadaan sentuhan rasa empati, kehangatan jiwa, dan nilai kemanusiaan"
+        },
+        answer: "E"
+      },
+      {
+        id: 3,
+        passageId: 1,
+        topic: "Makna Gramatikal & Afiksasi",
+        duration: 90,
+        text: "Manakah kata-kata berimbuhan dari Wacana 1 berikut yang memiliki makna gramatikal 'proses atau perbuatan'?<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 text-sm space-y-1'><div>(1) perkembangan</div><div>(2) pereduksian</div><div>(3) penajaman</div><div>(4) kepalsuan</div></div>Pilihan Jawaban:",
+        options: {
+          A: "(1) dan (4)",
+          B: "(1), (2), dan (3)",
+          C: "(2) dan (4)",
+          D: "(3) dan (4)",
+          E: "Semua benar"
+        },
+        answer: "B"
+      },
+      {
+        id: 4,
+        passageId: 1,
+        topic: "Hierarki Semantik (Hiponim-Hipernim)",
+        duration: 90,
+        isInput: true,
+        text: "<strong>[Isian Singkat]</strong> Perhatikan kalimat kedua pada Paragraf 2 Wacana 1 berikut:<br><blockquote class='border-l-4 border-slate-300 pl-3 italic text-slate-700 my-2'>\"Ketika teks hampa rasa membanjiri ruang digital, kepekaan masyarakat dalam menangkap satire, ironi, serta metafora luhur perlahan mengalami degradasi.\"</blockquote>Di dalam kajian semantik, kata-kata yang menduduki hubungan hierarkis sebagai hiponim dari konsep umum (hipernim) 'gaya bahasa (majas)' dalam kalimat tersebut berjumlah ...<br><span class='text-xs text-slate-500'>(Tuliskan jawaban dalam bentuk angka bulat saja!)</span>",
+        answer: "3"
+      },
+      {
+        id: 5,
+        passageId: 2,
+        topic: "Telaah Semantik & Relasi Makna",
+        duration: 150,
+        isTableBS: true,
+        text: "Tentukan nilai kebenaran mengenai telaah makna kata pada Wacana 2 dengan memilih kolom <strong>Benar</strong> atau <strong>Salah</strong>!",
+        statements: [
+          "Kata <em>lentera</em> pada Paragraf 1 digunakan dalam makna kiasan (metaforis) yang berarti sarana atau petunjuk penjelas ketidaktahuan.",
+          "Kata <em>usang</em> pada frasa <em>konsepsi usang</em> (Paragraf 2) berelasi secara antonimi langsung dengan kata <em>kuno</em>.",
+          "Kata <em>anyaman</em> pada Paragraf 1 bermakna leksikal murni berupa hasil kegiatan silang-menyilang bilah rotan secara fisik.",
+          "Kata <em>terpatri</em> pada kalimat terakhir Paragraf 2 mengandung makna gramatikal 'sudah melekat atau tertanam secara kukuh'."
+        ],
+        answer: ["Benar", "Salah", "Salah", "Benar"]
+      },
+      {
+        id: 6,
+        passageId: 2,
+        topic: "Hierarki Semantik (Ko-hiponim)",
+        duration: 90,
+        text: "Berdasarkan hierarki semantik pada Paragraf 1 Wacana 2, kata <em>Austro-Melanesia</em> dan kata <em>Austronesia</em> berkedudukan sebagai...",
+        options: {
+          A: "Ko-hiponim di bawah hipernim garis keturunan populasi",
+          B: "Homonim yang memiliki kesamaan ejaan dengan lafal berbeda",
+          C: "Pasangan antonim relasional yang menyatakan hubungan timbal balik",
+          D: "Kata polisemi yang maknanya berkembang secara gramatikal",
+          E: "Kata bersinonim mutlak yang dapat saling menggantikan tanpa batas"
+        },
+        answer: "A"
+      },
+      {
+        id: 7,
+        passageId: 2,
+        topic: "Perubahan & Pergeseran Makna",
+        duration: 120,
+        text: "Manakah pernyataan-pernyataan berikut yang TEPAT mengenai gejala perubahan atau perluasan makna kata yang terdapat dalam Wacana 2?<br><div class='bg-slate-50 border border-slate-200 rounded-lg p-3 my-2 text-sm space-y-1.5'><div>(1) Kata <em>lentera</em> mengalami pergeseran makna metaforis karena dianalogikan sebagai alat yang memberi penerangan pada misteri sejarah.</div><div>(2) Frasa <em>cetak biru</em> mengalami pergeseran asosiatif dari cetak teknis gambar arsitektur menjadi rancang bangun dasar genetika manusia.</div><div>(3) Kata <em>tabir</em> mengalami peyorasi makna karena berubah menjadi kata yang memiliki konotasi tidak sopan.</div><div>(4) Kata <em>anak</em> pada frasa <em>anak bangsa</em> mengalami perluasan makna (generalisasi) dari anak keturunan biologis menjadi seluruh generasi penerus atau warga negara.</div></div>Pilihan Jawaban:",
+        options: {
+          A: "(1) dan (3)",
+          B: "(2) dan (3)",
+          C: "(1), (2), dan (3)",
+          D: "(1), (2), dan (4)",
+          E: "Semua pernyataan benar"
+        },
+        answer: "D"
+      },
+      {
+        id: 8,
+        passageId: 3,
+        topic: "Makna Kontekstual & Metafora",
+        duration: 90,
+        text: "Frasa <em>harta karun molekuler</em> pada Paragraf 1 Wacana 3 dimaknai secara kontekstual sebagai...",
+        options: {
+          A: "Emas dan perhiasan berharga peninggalan kapal karam kuno di dasar perairan tropis",
+          B: "Senyawa kimia alami bernilai terapeutik dan bernilai ekonomi tinggi dalam biota laut",
+          C: "Cadangan devisa negara yang diperoleh langsung dari penambangan mineral lepas pantai",
+          D: "Kumpulan fosil mikroorganisme purba yang diawetkan di dalam laboratorium riset",
+          E: "Peralatan penelitian mikroskopi elektron canggih sumbangan negara sahabat"
+        },
+        answer: "B"
+      },
+      {
+        id: 9,
+        passageId: 3,
+        topic: "Telaah Semantik & Perubahan Makna",
+        duration: 150,
+        isTableBS: true,
+        text: "Tentukan apakah pernyataan mengenai makna kata berikut <strong>BENAR (B)</strong> atau <strong>SALAH (S)</strong> berdasarkan Wacana 3!",
+        statements: [
+          "Kata <em>terbelenggu</em> pada Paragraf 1 bermakna kiasan berupa kondisi terhambat atau terkekang dalam pola lama.",
+          "Kata <em>ironi</em> pada Paragraf 2 menunjukkan makna kontradiksi antara keadaan ideal yang diharapkan dan kenyataan riil.",
+          "Kata <em>primadona</em> pada Paragraf 1 mengalami penyempitan makna (spesialisasi) yang hanya merujuk pada biduan wanita panggung sandiwara.",
+          "Frasa <em>pajangan akademis</em> pada Paragraf 2 bermakna denotatif berupa barang dekorasi kerajinan tangan yang dipamerkan di etalase museum."
+        ],
+        answer: ["Benar", "Benar", "Salah", "Salah"]
+      },
+      {
+        id: 10,
+        passageId: 3,
+        topic: "Bentuk Terikat & Morfosemantik",
+        duration: 120,
+        isInput: true,
+        text: "<strong>[Isian Singkat]</strong> Perhatikan kalimat ketiga pada Paragraf 1 Wacana 3 berikut:<br><blockquote class='border-l-4 border-slate-300 pl-3 italic text-slate-700 my-2'>\"Kandungan senyawa bioaktif pada dinding sel alga terbukti memiliki khasiat antioksidan, antivirus, dan antikanker yang sangat potensial bagi industri farmasi mandiri.\"</blockquote>Berapakah jumlah kata dalam kalimat di atas yang menggunakan bentuk terikat pembentuk makna 'melawan atau mencegah'?<br><span class='text-xs text-slate-500'>(Tuliskan jawaban dalam bentuk angka bulat saja!)</span>",
+        answer: "3"
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * DUAL AUTOSAVE ENGINE (INDEXEDDB + LOCALSTORAGE)
+     * ============================================================================
+     */
+    const STORAGE_KEY = "snbt2027_bac_permata_cbt_v1";
+    const IDB_NAME = "SNBT2027_BAC_Permata_DB";
+    const IDB_STORE = "exam_sessions";
+
+    function openIDB() {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) {
+          resolve(null);
+          return;
+        }
+        try {
+          const req = indexedDB.open(IDB_NAME, 1);
+          req.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains(IDB_STORE)) {
+              db.createObjectStore(IDB_STORE, { keyPath: "key" });
+            }
+          };
+          req.onsuccess = (e) => resolve(e.target.result);
+          req.onerror = () => resolve(null);
+        } catch (err) {
+          resolve(null);
+        }
+      });
+    }
+
+    async function saveDualState(stateObj) {
+      stateObj.updatedAt = Date.now();
+      const serialized = JSON.stringify(stateObj);
+      try {
+        localStorage.setItem(STORAGE_KEY, serialized);
+      } catch (e) {
+        // Fallback silently if localStorage quota exceeded
+      }
+      try {
+        const db = await openIDB();
+        if (db) {
+          const tx = db.transaction(IDB_STORE, "readwrite");
+          tx.objectStore(IDB_STORE).put({ key: "active_session", payload: serialized, updatedAt: stateObj.updatedAt });
+        }
+      } catch (e) {
+        // Silent IDB fallback
+      }
+    }
+
+    async function loadDualState() {
+      let lsState = null;
+      let idbState = null;
+
+      try {
+        const rawLS = localStorage.getItem(STORAGE_KEY);
+        if (rawLS) lsState = JSON.parse(rawLS);
+      } catch (e) {}
+
+      try {
+        const db = await openIDB();
+        if (db) {
+          idbState = await new Promise((resolve) => {
+            const tx = db.transaction(IDB_STORE, "readonly");
+            const req = tx.objectStore(IDB_STORE).get("active_session");
+            req.onsuccess = () => {
+              if (req.result && req.result.payload) {
+                try {
+                  resolve(JSON.parse(req.result.payload));
+                } catch (err) {
+                  resolve(null);
+                }
+              } else {
+                resolve(null);
+              }
+            };
+            req.onerror = () => resolve(null);
+          });
+        }
+      } catch (e) {}
+
+      if (idbState && lsState) {
+        return (idbState.updatedAt || 0) >= (lsState.updatedAt || 0) ? idbState : lsState;
+      }
+      return idbState || lsState || null;
+    }
+
+    /**
+     * ============================================================================
+     * FULLSCREEN API CROSS-BROWSER & SILENT TAB-SWITCH DETECTOR
+     * ============================================================================
+     */
+    function requestCrossBrowserFullscreen() {
+      try {
+        const docEl = document.documentElement;
+        if (
+          document.fullscreenElement ||
+          document.webkitFullscreenElement ||
+          document.mozFullScreenElement ||
+          document.msFullscreenElement
+        ) {
+          return;
+        }
+        if (docEl.requestFullscreen) {
+          docEl.requestFullscreen().catch(() => {});
+        } else if (docEl.webkitRequestFullscreen) {
+          docEl.webkitRequestFullscreen();
+        } else if (docEl.mozRequestFullScreen) {
+          docEl.mozRequestFullScreen();
+        } else if (docEl.msRequestFullscreen) {
+          docEl.msRequestFullscreen();
+        }
+      } catch (e) {
+        // Silent ignore if browser policy blocks fullscreen without gesture
+      }
+    }
+
+    let lastTabSwitchTime = 0;
+    function recordSilentTabSwitch() {
+      if (!appState || appState.status !== "IN_PROGRESS") return;
+      const now = Date.now();
+      // Anti-bounce filter (~700ms) so visibilitychange + blur don't double-count
+      if (now - lastTabSwitchTime < 700) return;
+      lastTabSwitchTime = now;
+      appState.tabSwitchCount = (appState.tabSwitchCount || 0) + 1;
+      saveDualState(appState);
+    }
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        recordSilentTabSwitch();
+      }
+      if (appState && (appState.status === "IN_PROGRESS" || appState.status === "READY_TO_SUBMIT")) {
+        saveDualState(appState);
+      }
+    });
+
+    window.addEventListener("blur", () => {
+      recordSilentTabSwitch();
+    });
+
+    window.addEventListener("beforeunload", () => {
+      if (appState && (appState.status === "IN_PROGRESS" || appState.status === "READY_TO_SUBMIT")) {
+        saveDualState(appState);
+      }
+    });
+
+    /**
+     * ============================================================================
+     * UTILITY FUNCTIONS (FISHER-YATES SHUFFLE, ADAPTIVE QUEUE, FORMATTERS)
+     * ============================================================================
+     */
+    function fisherYatesShuffle(array) {
+      const arr = array.slice();
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+      }
+      return arr;
+    }
+
+    /**
+     * Membangun antrean soal mundur per bagian Tahap 1:
+     * Dimulai dari startId, mundur ke minId, lalu melingkar mundur dari maxId ke startId+1
+     * jika semua soal mundur awal belum terjawab benar.
+     */
+    function buildReverseSectionQueue(sectionObj) {
+      const queue = [];
+      for (let id = sectionObj.startId; id >= sectionObj.minId; id--) {
+        queue.push(id);
+      }
+      for (let id = sectionObj.maxId; id > sectionObj.startId; id--) {
+        queue.push(id);
+      }
+      return queue;
+    }
+
+    function formatMMSS(totalSec) {
+      const sec = Math.max(0, Math.floor(totalSec));
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    function triggerMathJax() {
+      if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+        window.MathJax.typesetPromise().catch(() => {});
+      }
+    }
+
+    function getOptionOrder(qKey) {
+      if (!appState.optionOrderMap) appState.optionOrderMap = {};
+      if (!appState.optionOrderMap[qKey]) {
+        appState.optionOrderMap[qKey] = fisherYatesShuffle(["A", "B", "C", "D", "E"]);
+      }
+      return appState.optionOrderMap[qKey];
+    }
+
+    /**
+     * ============================================================================
+     * APPLICATION STATE & TIMER CONTROLLER
+     * ============================================================================
+     */
+    let appState = null;
+    let countdownInterval = null;
+    let isQuestionLocked = false;
+    let autoAdvanceTimeout = null;
+
+    function createInitialState(studentName, studentClass) {
+      const sectionQueues = {};
+      STAGE1_SECTIONS.forEach((sec) => {
+        sectionQueues[sec.code] = buildReverseSectionQueue(sec);
+      });
+
+      const firstSec = STAGE1_SECTIONS[0];
+      const firstQId = sectionQueues[firstSec.code][0];
+
+      return {
+        status: "IN_PROGRESS", // NOT_STARTED | IN_PROGRESS | READY_TO_SUBMIT | COMPLETED
+        studentName: studentName.trim(),
+        studentClass: studentClass,
+        activeStage: 1, // 1 or 2
+        stage1: {
+          currentSectionIndex: 0,
+          sectionQueues: sectionQueues,
+          currentQId: firstQId,
+          history: [] // { qId, section, topic, userAnswer, isCorrect, isTimeout }
+        },
+        stage2: {
+          currentIndex: 0, // 0..9
+          results: Array(STAGE2_QUESTIONS.length).fill(null), // null or { qId, topic, userAnswer, isCorrect, isTimeout }
+          draftTableBS: {}, // { qId: [null, null, null, null] }
+          draftInput: {}    // { qId: "" }
+        },
+        remainingSeconds: firstSec.duration,
+        totalDurationSeconds: 0,
+        tabSwitchCount: 0,
+        optionOrderMap: {},
+        submittedToSheets: false,
+        completedAt: null,
+        updatedAt: Date.now()
+      };
+    }
+
+    function stopQuestionTimer() {
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+        countdownInterval = null;
+      }
+    }
+
+    function updateTimerBadgeUI() {
+      const badge = document.getElementById("timerBadge");
+      const display = document.getElementById("timerDisplay");
+      if (!badge || !display || !appState) return;
+
+      const rem = Math.max(0, appState.remainingSeconds);
+      display.textContent = formatMMSS(rem);
+
+      badge.classList.remove("bg-blue-600", "text-white", "bg-amber-400", "text-slate-900", "timer-critical");
+      if (rem <= 15) {
+        badge.classList.add("timer-critical");
+      } else if (rem <= 30) {
+        badge.classList.add("bg-amber-400", "text-slate-900");
+      } else {
+        badge.classList.add("bg-blue-600", "text-white");
+      }
+    }
+
+    function startQuestionTimer() {
+      stopQuestionTimer();
+      updateTimerBadgeUI();
+
+      countdownInterval = setInterval(() => {
+        if (!appState || appState.status !== "IN_PROGRESS") {
+          stopQuestionTimer();
+          return;
+        }
+        if (isQuestionLocked) return;
+
+        appState.remainingSeconds = Math.max(0, appState.remainingSeconds - 1);
+        appState.totalDurationSeconds = (appState.totalDurationSeconds || 0) + 1;
+        updateTimerBadgeUI();
+
+        // Autosave berkala setiap 5 detik
+        if (appState.totalDurationSeconds % 5 === 0) {
+          saveDualState(appState);
+        }
+
+        if (appState.remainingSeconds <= 0) {
+          stopQuestionTimer();
+          handleQuestionTimeout();
+        }
+      }, 1000);
+    }
+
+    /**
+     * ============================================================================
+     * VIEW SWITCHING & INITIALIZATION
+     * ============================================================================
+     */
+    function showOnlyView(viewId) {
+      ["deadlineView", "welcomeView", "examView", "closingView"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) {
+          if (id === viewId) {
+            el.classList.remove("hidden");
+          } else {
+            el.classList.add("hidden");
+          }
+        }
+      });
+
+      const headerControls = document.getElementById("headerRightControls");
+      if (headerControls) {
+        if (viewId === "examView" && appState && appState.status === "IN_PROGRESS") {
+          headerControls.classList.remove("hidden");
+        } else {
+          headerControls.classList.add("hidden");
+        }
+      }
+    }
+
+    function checkDeadlineStatus() {
+      if (!EXAM_CONFIG.ENABLE_DEADLINE) return { allowed: true };
+      const now = Date.now();
+      const start = new Date(EXAM_CONFIG.START_TIME).getTime();
+      const end = new Date(EXAM_CONFIG.END_TIME).getTime();
+
+      if (now < start) {
+        return {
+          allowed: false,
+          reason: "BEFORE",
+          message: `Periode pengerjaan <strong>ROAD TO SNBT 2027 — Brain Academy Bogor Permata</strong> belum dibuka.<br><br>Latihan ini hanya dapat diakses pada periode resmi:<br><span class="inline-block mt-2 px-4 py-1.5 rounded-lg bg-blue-50 text-blue-700 font-bold border border-blue-200">16 – 22 November 2026</span>`
+        };
+      }
+      if (now > end) {
+        return {
+          allowed: false,
+          reason: "AFTER",
+          message: `Periode pengerjaan <strong>ROAD TO SNBT 2027 — Brain Academy Bogor Permata</strong> (<strong>16 – 22 November 2026</strong>) telah resmi berakhir.<br><br>Silakan hubungi Master Teacher atau Akademik Brain Academy Bogor Permata untuk informasi pembahasan dan jadwal berikutnya.`
+        };
+      }
+      return { allowed: true };
+    }
+
+    async function bootstrapApp() {
+      const saved = await loadDualState();
+
+      // 1. Jika siswa sudah menyelesaikan latihan (COMPLETED), langsung tampilkan Closing Page
+      if (saved && saved.status === "COMPLETED") {
+        appState = saved;
+        renderClosingPage();
+        if (!appState.submittedToSheets) {
+          submitResultsToGoogleSheets();
+        }
+        return;
+      }
+
+      // 2. Cek batas periode latihan (Deadline)
+      const deadlineCheck = checkDeadlineStatus();
+      if (!deadlineCheck.allowed) {
+        document.getElementById("deadlineMessageBox").innerHTML = deadlineCheck.message;
+        showOnlyView("deadlineView");
+        return;
+      }
+
+      // 3. Direct Resume: Jika ada sesi IN_PROGRESS atau READY_TO_SUBMIT, bypass Welcoming Page
+      if (saved && (saved.status === "IN_PROGRESS" || saved.status === "READY_TO_SUBMIT")) {
+        appState = saved;
+        enterExamInterface(true);
+        return;
+      }
+
+      // 4. Sesi baru: Tampilkan Welcoming Page
+      setupWelcomePage();
+      showOnlyView("welcomeView");
+    }
+
+    /**
+     * ============================================================================
+     * WELCOMING PAGE HANDLERS
+     * ============================================================================
+     */
+    function setupWelcomePage() {
+      const nameInput = document.getElementById("studentNameInput");
+      const classSelect = document.getElementById("studentClassSelect");
+      const startBtn = document.getElementById("startExamBtn");
+      const form = document.getElementById("identityForm");
+
+      function validateForm() {
+        const validName = nameInput.value.trim().length > 0;
+        const validClass = classSelect.value.trim().length > 0;
+        startBtn.disabled = !(validName && validClass);
+      }
+
+      nameInput.addEventListener("input", validateForm);
+      classSelect.addEventListener("change", validateForm);
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const nameVal = nameInput.value.trim();
+        const classVal = classSelect.value.trim();
+        if (!nameVal || !classVal) return;
+
+        requestCrossBrowserFullscreen();
+        appState = createInitialState(nameVal, classVal);
+        await saveDualState(appState);
+        enterExamInterface(false);
+      });
+    }
+
+    /**
+     * ============================================================================
+     * EXAM INTERFACE & RENDERING (STAGE 1 & STAGE 2)
+     * ============================================================================
+     */
+    function enterExamInterface(isResume) {
+      showOnlyView("examView");
+
+      // Isi identitas siswa di sub-header
+      document.getElementById("examStudentName").textContent = appState.studentName;
+      document.getElementById("examStudentClass").textContent = `Kelas ${appState.studentClass}`;
+      const initials = appState.studentName
+        .split(/\s+/)
+        .slice(0, 2)
+        .map((w) => w[0] || "")
+        .join("")
+        .toUpperCase() || "BA";
+      document.getElementById("avatarInitials").textContent = initials;
+
+      // Re-request fullscreen pada interaksi klik pertama saat direct resume
+      if (isResume) {
+        const reFullscreenOnce = () => {
+          requestCrossBrowserFullscreen();
+          document.removeEventListener("pointerdown", reFullscreenOnce);
+        };
+        document.addEventListener("pointerdown", reFullscreenOnce, { once: true });
+      }
+
+      if (appState.status === "READY_TO_SUBMIT") {
+        renderReadyToSubmitState();
+        return;
+      }
+
+      renderCurrentQuestion();
+      startQuestionTimer();
+    }
+
+    function renderCurrentQuestion() {
+      isQuestionLocked = false;
+      if (autoAdvanceTimeout) {
+        clearTimeout(autoAdvanceTimeout);
+        autoAdvanceTimeout = null;
+      }
+
+      document.getElementById("finishActionPanel").classList.add("hidden");
+      document.getElementById("questionWorkspace").classList.remove("hidden");
+
+      const stageBadge = document.getElementById("stageBadge");
+      const mobileStageLabel = document.getElementById("mobileStageLabel");
+
+      if (appState.activeStage === 1) {
+        stageBadge.textContent = "Tahap 1: Penguatan Konsep Bahasa Indonesia";
+        mobileStageLabel.textContent = "Tahap 1: Konsep B. Indonesia";
+        renderStage1Question();
+      } else {
+        stageBadge.textContent = "Tahap 2: Pengetahuan & Pemahaman Umum";
+        mobileStageLabel.textContent = "Tahap 2: PPU";
+        renderStage2Question();
+      }
+
+      triggerMathJax();
+    }
+
+    function renderStage1Question() {
+      // Sembunyikan elemen Tahap 2
+      document.getElementById("stage2PaletteWrapper").classList.add("hidden");
+      document.getElementById("passagePanel").classList.add("hidden");
+      document.getElementById("questionNumberHeader").classList.add("hidden");
+      document.getElementById("shortAnswerContainer").classList.add("hidden");
+      document.getElementById("tableBSContainer").classList.add("hidden");
+
+      // Tampilkan elemen Tahap 1
+      document.getElementById("stage1ProgressWrapper").classList.remove("hidden");
+      document.getElementById("mcqOptionsContainer").classList.remove("hidden");
+      const workspace = document.getElementById("questionWorkspace");
+      workspace.className = "grid grid-cols-1 gap-4";
+
+      const secIdx = appState.stage1.currentSectionIndex;
+      const secObj = STAGE1_SECTIONS[secIdx];
+      const qId = appState.stage1.currentQId;
+      const question = STAGE1_QUESTIONS.find((q) => q.id === qId);
+
+      // Update Progress Bar Bagian (TANPA MENAMPILKAN NOMOR SOAL)
+      const pct = Math.round(((secIdx + 1) / STAGE1_SECTIONS.length) * 100);
+      document.getElementById("stage1SectionTitle").textContent = `${secObj.title} (Bagian ${secIdx + 1} dari ${STAGE1_SECTIONS.length})`;
+      document.getElementById("stage1ProgressPercent").textContent = `Progres Tahap 1: ${pct}%`;
+      document.getElementById("stage1ProgressBar").style.width = `${pct}%`;
+
+      document.getElementById("questionTopicBadge").textContent = question.topic;
+      document.getElementById("questionText").innerHTML = question.text;
+
+      renderShuffledMCQOptions(`S1_${question.id}`, question, (selectedOrigKey, btnEl) => {
+        handleStage1Answer(question, selectedOrigKey, btnEl, false);
+      });
+    }
+
+    function renderStage2Question() {
+      // Sembunyikan elemen Tahap 1
+      document.getElementById("stage1ProgressWrapper").classList.add("hidden");
+
+      // Tampilkan elemen Tahap 2
+      document.getElementById("stage2PaletteWrapper").classList.remove("hidden");
+      document.getElementById("passagePanel").classList.remove("hidden");
+      document.getElementById("questionNumberHeader").classList.remove("hidden");
+
+      const workspace = document.getElementById("questionWorkspace");
+      workspace.className = "grid grid-cols-1 lg:grid-cols-12 gap-4 items-start";
+      document.getElementById("passagePanel").className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6 lg:col-span-5 lg:sticky lg:top-20 max-h-[68vh] overflow-y-auto";
+      document.getElementById("questionCard").className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-7 lg:col-span-7";
+
+      const qIdx = appState.stage2.currentIndex;
+      const question = STAGE2_QUESTIONS[qIdx];
+      const passage = STAGE2_PASSAGES[question.passageId];
+
+      // Render Palet Nomor Soal 1-10
+      renderStage2Palette();
+
+      // Render Wacana
+      document.getElementById("passageTitle").textContent = passage.title;
+      document.getElementById("passageContent").innerHTML = passage.paragraphs
+        .map((p) => `<p>${p}</p>`)
+        .join("");
+
+      // Render Header & Teks Soal
+      document.getElementById("questionNumberHeader").textContent = `Soal Nomor ${question.id} dari ${STAGE2_QUESTIONS.length}`;
+      document.getElementById("questionTopicBadge").textContent = question.topic;
+      document.getElementById("questionText").innerHTML = question.text;
+
+      const mcqBox = document.getElementById("mcqOptionsContainer");
+      const inputBox = document.getElementById("shortAnswerContainer");
+      const tableBox = document.getElementById("tableBSContainer");
+
+      mcqBox.classList.add("hidden");
+      inputBox.classList.add("hidden");
+      tableBox.classList.add("hidden");
+
+      if (question.isInput) {
+        inputBox.classList.remove("hidden");
+        renderStage2ShortAnswer(question);
+      } else if (question.isTableBS) {
+        tableBox.classList.remove("hidden");
+        renderStage2TableBS(question);
+      } else {
+        mcqBox.classList.remove("hidden");
+        renderShuffledMCQOptions(`S2_${question.id}`, question, (selectedOrigKey, btnEl) => {
+          handleStage2Answer(question, selectedOrigKey, selectedOrigKey === question.answer, btnEl, false);
+        });
+      }
+    }
+
+    function renderStage2Palette() {
+      const grid = document.getElementById("stage2PaletteGrid");
+      grid.innerHTML = "";
+
+      STAGE2_QUESTIONS.forEach((q, idx) => {
+        const res = appState.stage2.results[idx];
+        const isActive = idx === appState.stage2.currentIndex && appState.status === "IN_PROGRESS";
+
+        const item = document.createElement("div");
+        let colorClasses = "bg-white text-slate-700 border-slate-300";
+        if (res) {
+          colorClasses = res.isCorrect
+            ? "bg-emerald-500 text-white border-emerald-600"
+            : "bg-rose-500 text-white border-rose-600";
+        }
+        const activeRing = isActive ? "ring-2 ring-blue-600 ring-offset-2 font-extrabold" : "font-bold";
+
+        item.className = `h-9 rounded-lg border text-xs flex items-center justify-center select-none transition ${colorClasses} ${activeRing}`;
+        item.textContent = q.id;
+        grid.appendChild(item);
+      });
+    }
+
+    function renderShuffledMCQOptions(qKey, question, onSelectCallback) {
+      const container = document.getElementById("mcqOptionsContainer");
+      container.innerHTML = "";
+
+      const displayLetters = ["A", "B", "C", "D", "E"];
+      const order = getOptionOrder(qKey);
+
+      order.forEach((origKey, idx) => {
+        const displayLetter = displayLetters[idx];
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.dataset.origKey = origKey;
+        btn.className =
+          "option-btn w-full text-left p-3.5 sm:p-4 rounded-xl border-2 border-slate-200 bg-white hover:border-blue-500 hover:bg-blue-50/40 transition-all duration-150 flex items-start gap-3.5 group focus:outline-none";
+
+        btn.innerHTML = `
+          <span class="option-badge w-8 h-8 rounded-lg bg-slate-100 group-hover:bg-blue-600 group-hover:text-white text-slate-700 font-bold text-sm flex items-center justify-center shrink-0 transition-colors">
+            ${displayLetter}
+          </span>
+          <span class="text-sm sm:text-[15px] text-slate-800 leading-relaxed pt-0.5">${question.options[origKey]}</span>
+        `;
+
+        btn.addEventListener("click", () => {
+          if (isQuestionLocked) return;
+          isQuestionLocked = true;
+          stopQuestionTimer();
+          lockAllOptionsUI();
+          onSelectCallback(origKey, btn);
+        });
+
+        container.appendChild(btn);
+      });
+    }
+
+    function lockAllOptionsUI() {
+      const btns = document.querySelectorAll("#mcqOptionsContainer .option-btn");
+      btns.forEach((b) => {
+        b.disabled = true;
+        b.classList.remove("hover:border-blue-500", "hover:bg-blue-50/40");
+        b.classList.add("cursor-default");
+      });
+    }
+
+    function applyOptionFeedbackStyle(btnEl, isCorrect) {
+      if (!btnEl) return;
+      const badge = btnEl.querySelector(".option-badge");
+      btnEl.classList.remove("border-slate-200", "bg-white");
+      if (badge) {
+        badge.classList.remove("bg-slate-100", "text-slate-700", "group-hover:bg-blue-600");
+      }
+
+      if (isCorrect) {
+        btnEl.classList.add("border-emerald-600", "bg-emerald-600", "text-white");
+        btnEl.querySelectorAll("span").forEach((s) => s.classList.add("text-white"));
+        if (badge) badge.classList.add("bg-emerald-800", "text-white");
+      } else {
+        btnEl.classList.add("border-rose-600", "bg-rose-600", "text-white");
+        btnEl.querySelectorAll("span").forEach((s) => s.classList.add("text-white"));
+        if (badge) badge.classList.add("bg-rose-800", "text-white");
+      }
+    }
+
+    function renderStage2ShortAnswer(question) {
+      const inputEl = document.getElementById("shortAnswerInput");
+      const submitBtn = document.getElementById("submitShortAnswerBtn");
+
+      // Reset classes
+      inputEl.disabled = false;
+      inputEl.className =
+        "w-full px-4 py-3.5 text-lg font-bold text-slate-900 rounded-xl border-2 border-slate-300 focus:outline-none focus:border-blue-600 transition";
+      submitBtn.disabled = true;
+      submitBtn.className =
+        "px-6 py-3 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed transition shadow-sm";
+
+      const draftVal = (appState.stage2.draftInput && appState.stage2.draftInput[question.id]) || "";
+      inputEl.value = draftVal;
+      submitBtn.disabled = draftVal.trim().length === 0;
+
+      inputEl.oninput = () => {
+        if (isQuestionLocked) return;
+        // Hanya izinkan angka bulat positif (digit 0-9)
+        const cleaned = inputEl.value.replace(/[^0-9]/g, "");
+        inputEl.value = cleaned;
+        if (!appState.stage2.draftInput) appState.stage2.draftInput = {};
+        appState.stage2.draftInput[question.id] = cleaned;
+        submitBtn.disabled = cleaned.length === 0;
+      };
+
+      submitBtn.onclick = () => {
+        if (isQuestionLocked) return;
+        const val = inputEl.value.trim();
+        if (!val) return;
+        isQuestionLocked = true;
+        stopQuestionTimer();
+        inputEl.disabled = true;
+        submitBtn.disabled = true;
+
+        const normalizedUser = String(parseInt(val, 10));
+        const isCorrect = normalizedUser === String(question.answer);
+
+        inputEl.classList.remove("border-slate-300");
+        if (isCorrect) {
+          inputEl.classList.add("border-emerald-600", "bg-emerald-50", "text-emerald-900");
+        } else {
+          inputEl.classList.add("border-rose-600", "bg-rose-50", "text-rose-900");
+        }
+
+        handleStage2Answer(question, normalizedUser, isCorrect, null, false);
+      };
+    }
+
+    function renderStage2TableBS(question) {
+      const tbody = document.getElementById("tableBSBody");
+      const submitBtn = document.getElementById("submitTableBSBtn");
+      tbody.innerHTML = "";
+
+      submitBtn.disabled = true;
+      submitBtn.className =
+        "px-6 py-3 rounded-xl font-bold text-sm text-white bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 disabled:text-slate-500 disabled:cursor-not-allowed transition shadow-sm";
+
+      if (!appState.stage2.draftTableBS) appState.stage2.draftTableBS = {};
+      if (!Array.isArray(appState.stage2.draftTableBS[question.id])) {
+        appState.stage2.draftTableBS[question.id] = Array(question.statements.length).fill(null);
+      }
+
+      const currentSelections = appState.stage2.draftTableBS[question.id];
+
+      function updateSubmitReady() {
+        const allSelected = currentSelections.every((v) => v === "Benar" || v === "Salah");
+        submitBtn.disabled = !allSelected;
+      }
+
+      question.statements.forEach((stmt, rowIdx) => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-50/70 transition-colors";
+
+        const tdStmt = document.createElement("td");
+        tdStmt.className = "p-3.5 text-slate-800 leading-relaxed";
+        tdStmt.innerHTML = stmt;
+
+        const tdBenar = document.createElement("td");
+        tdBenar.className = "p-3 text-center align-middle";
+
+        const tdSalah = document.createElement("td");
+        tdSalah.className = "p-3 text-center align-middle";
+
+        ["Benar", "Salah"].forEach((choice) => {
+          const label = document.createElement("label");
+          label.className = "inline-flex items-center justify-center w-full h-9 rounded-lg border cursor-pointer font-semibold text-xs transition select-none";
+          const radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = `bs_q_${question.id}_row_${rowIdx}`;
+          radio.value = choice;
+          radio.className = "sr-only";
+
+          const span = document.createElement("span");
+          span.textContent = choice;
+
+          function syncLabelStyle() {
+            if (currentSelections[rowIdx] === choice) {
+              label.classList.remove("border-slate-200", "bg-white", "text-slate-600");
+              label.classList.add("border-blue-600", "bg-blue-600", "text-white");
+            } else {
+              label.classList.remove("border-blue-600", "bg-blue-600", "text-white");
+              label.classList.add("border-slate-200", "bg-white", "text-slate-600");
+            }
+          }
+
+          if (currentSelections[rowIdx] === choice) {
+            radio.checked = true;
+          }
+          syncLabelStyle();
+
+          radio.addEventListener("change", () => {
+            if (isQuestionLocked) return;
+            currentSelections[rowIdx] = choice;
+            // Refresh both labels in this row
+            tr.querySelectorAll("label").forEach((lbl) => {
+              const inp = lbl.querySelector("input");
+              if (inp.value === currentSelections[rowIdx]) {
+                lbl.classList.remove("border-slate-200", "bg-white", "text-slate-600");
+                lbl.classList.add("border-blue-600", "bg-blue-600", "text-white");
+              } else {
+                lbl.classList.remove("border-blue-600", "bg-blue-600", "text-white");
+                lbl.classList.add("border-slate-200", "bg-white", "text-slate-600");
+              }
+            });
+            updateSubmitReady();
+            saveDualState(appState);
+          });
+
+          label.appendChild(radio);
+          label.appendChild(span);
+
+          if (choice === "Benar") {
+            tdBenar.appendChild(label);
+          } else {
+            tdSalah.appendChild(label);
+          }
+        });
+
+        tr.appendChild(tdStmt);
+        tr.appendChild(tdBenar);
+        tr.appendChild(tdSalah);
+        tbody.appendChild(tr);
+      });
+
+      updateSubmitReady();
+
+      submitBtn.onclick = () => {
+        if (isQuestionLocked) return;
+        const allSelected = currentSelections.every((v) => v === "Benar" || v === "Salah");
+        if (!allSelected) return;
+
+        isQuestionLocked = true;
+        stopQuestionTimer();
+        submitBtn.disabled = true;
+
+        tbody.querySelectorAll("input[type='radio']").forEach((r) => (r.disabled = true));
+
+        const isCorrect = question.answer.every((ans, idx) => currentSelections[idx] === ans);
+
+        // Umpan balik warna keseluruhan tanpa membocorkan kunci tiap baris
+        const tableWrapper = document.querySelector("#tableBSContainer > div");
+        if (tableWrapper) {
+          tableWrapper.classList.remove("border-slate-200");
+          tableWrapper.classList.add(isCorrect ? "border-emerald-600" : "border-rose-600", "border-2");
+        }
+
+        handleStage2Answer(question, currentSelections.join(", "), isCorrect, null, false);
+      };
+    }
+
+    /**
+     * ============================================================================
+     * LOGIKA MESIN ADAPTIF TAHAP 1 & TRANSISI KE TAHAP 2
+     * ============================================================================
+     */
+    function handleStage1Answer(question, userAnswer, btnEl, isTimeout) {
+      const isCorrect = !isTimeout && userAnswer === question.answer;
+      if (btnEl) {
+        applyOptionFeedbackStyle(btnEl, isCorrect);
+      }
+
+      const secIdx = appState.stage1.currentSectionIndex;
+      const secObj = STAGE1_SECTIONS[secIdx];
+
+      // Catat riwayat jawaban Tahap 1
+      appState.stage1.history.push({
+        qId: question.id,
+        section: secObj.code,
+        topic: question.topic,
+        userAnswer: userAnswer,
+        isCorrect: isCorrect,
+        isTimeout: isTimeout
+      });
+
+      // Hapus soal yang baru dikerjakan dari antrean bagian ini
+      const queue = appState.stage1.sectionQueues[secObj.code] || [];
+      const idxInQueue = queue.indexOf(question.id);
+      if (idxInQueue !== -1) {
+        queue.splice(idxInQueue, 1);
+      }
+
+      // Evaluasi langkah adaptif terbalik:
+      // Jika BENAR -> langsung lompat ke soal awal bagian berikutnya!
+      // Jika SALAH/TIMEOUT -> ambil soal mundur berikutnya dalam bagian yang sama (jika masih ada).
+      if (isCorrect || queue.length === 0) {
+        const nextSecIdx = secIdx + 1;
+        if (nextSecIdx < STAGE1_SECTIONS.length) {
+          const nextSecObj = STAGE1_SECTIONS[nextSecIdx];
+          appState.stage1.currentSectionIndex = nextSecIdx;
+          appState.stage1.currentQId = appState.stage1.sectionQueues[nextSecObj.code][0];
+          appState.remainingSeconds = nextSecObj.duration;
+        } else {
+          // Tahap 1 selesai -> OTOMATIS langsung berpindah ke Tahap 2 Nomor 1!
+          appState.activeStage = 2;
+          appState.stage2.currentIndex = 0;
+          appState.remainingSeconds = STAGE2_QUESTIONS[0].duration;
+        }
+      } else {
+        // Tetap di bagian yang sama, ambil soal mundur berikutnya
+        appState.stage1.currentQId = queue[0];
+        appState.remainingSeconds = secObj.duration;
+      }
+
+      saveDualState(appState);
+
+      const delay = isTimeout ? 350 : 620;
+      autoAdvanceTimeout = setTimeout(() => {
+        renderCurrentQuestion();
+        startQuestionTimer();
+      }, delay);
+    }
+
+    function handleStage2Answer(question, userAnswer, isCorrect, btnEl, isTimeout) {
+      if (btnEl) {
+        applyOptionFeedbackStyle(btnEl, isCorrect);
+      }
+
+      const qIdx = appState.stage2.currentIndex;
+      appState.stage2.results[qIdx] = {
+        qId: question.id,
+        topic: question.topic,
+        userAnswer: userAnswer,
+        isCorrect: isCorrect,
+        isTimeout: isTimeout
+      };
+
+      renderStage2Palette();
+
+      const nextIdx = qIdx + 1;
+      if (nextIdx < STAGE2_QUESTIONS.length) {
+        appState.stage2.currentIndex = nextIdx;
+        appState.remainingSeconds = STAGE2_QUESTIONS[nextIdx].duration;
+        saveDualState(appState);
+
+        const delay = isTimeout ? 350 : 620;
+        autoAdvanceTimeout = setTimeout(() => {
+          renderCurrentQuestion();
+          startQuestionTimer();
+        }, delay);
+      } else {
+        // Seluruh soal Tahap 1 dan Tahap 2 telah selesai!
+        appState.status = "READY_TO_SUBMIT";
+        appState.remainingSeconds = 0;
+        saveDualState(appState);
+
+        const delay = isTimeout ? 350 : 620;
+        autoAdvanceTimeout = setTimeout(() => {
+          renderReadyToSubmitState();
+        }, delay);
+      }
+    }
+
+    function handleQuestionTimeout() {
+      isQuestionLocked = true;
+      if (appState.activeStage === 1) {
+        lockAllOptionsUI();
+        const qId = appState.stage1.currentQId;
+        const question = STAGE1_QUESTIONS.find((q) => q.id === qId);
+        handleStage1Answer(question, "TIMEOUT", null, true);
+      } else {
+        const qIdx = appState.stage2.currentIndex;
+        const question = STAGE2_QUESTIONS[qIdx];
+        if (!question.isInput && !question.isTableBS) {
+          lockAllOptionsUI();
+        }
+        handleStage2Answer(question, "TIMEOUT", false, null, true);
+      }
+    }
+
+    function renderReadyToSubmitState() {
+      stopQuestionTimer();
+      document.getElementById("headerRightControls").classList.add("hidden");
+      document.getElementById("questionWorkspace").classList.add("hidden");
+      document.getElementById("stage1ProgressWrapper").classList.add("hidden");
+
+      // Tampilkan palet akhir pada Tahap 2
+      document.getElementById("stage2PaletteWrapper").classList.remove("hidden");
+      renderStage2Palette();
+
+      const finishPanel = document.getElementById("finishActionPanel");
+      finishPanel.classList.remove("hidden");
+
+      const finishBtn = document.getElementById("finishExamBtn");
+      finishBtn.onclick = async () => {
+        finishBtn.disabled = true;
+        finishBtn.innerHTML = `<span>Menyimpan Hasil &amp; Membuka Analisis...</span>`;
+        appState.status = "COMPLETED";
+        appState.completedAt = new Date().toISOString();
+        await saveDualState(appState);
+        renderClosingPage();
+        submitResultsToGoogleSheets();
+      };
+    }
+
+    /**
+     * ============================================================================
+     * CLOSING PAGE, ANALISIS SUBTOPIK, & INTEGRASI GOOGLE SPREADSHEET
+     * ============================================================================
+     */
+    function computeEvaluationSummary() {
+      const s1History = appState.stage1.history || [];
+      const s1Displayed = s1History.length;
+      const s1Correct = s1History.filter((item) => item.isCorrect).length;
+      const s1Wrong = s1Displayed - s1Correct;
+      const s1Score = s1Displayed > 0 ? Math.round((s1Correct / s1Displayed) * 100) : 0;
+
+      const s2Results = (appState.stage2.results || []).filter(Boolean);
+      const s2Total = STAGE2_QUESTIONS.length;
+      const s2Correct = s2Results.filter((item) => item.isCorrect).length;
+      const s2Wrong = s2Total - s2Correct;
+      const s2Score = Math.round((s2Correct / s2Total) * 100);
+
+      const totalCorrect = s1Correct + s2Correct;
+      const totalWrong = s1Wrong + s2Wrong;
+      const durationStr = formatMMSS(appState.totalDurationSeconds || 0);
+      const tabSwitchCount = appState.tabSwitchCount || 0;
+
+      // Pemetaan penguasaan subtopik Tahap 1
+      const s1TopicMap = new Map();
+      s1History.forEach((h) => {
+        if (!s1TopicMap.has(h.topic)) {
+          s1TopicMap.set(h.topic, { stage: 1, topic: h.topic, correct: 0, total: 0 });
+        }
+        const entry = s1TopicMap.get(h.topic);
+        entry.total += 1;
+        if (h.isCorrect) entry.correct += 1;
+      });
+
+      // Pemetaan penguasaan subtopik Tahap 2
+      const s2TopicMap = new Map();
+      STAGE2_QUESTIONS.forEach((q, idx) => {
+        const res = appState.stage2.results[idx];
+        if (!s2TopicMap.has(q.topic)) {
+          s2TopicMap.set(q.topic, { stage: 2, topic: q.topic, correct: 0, total: 0 });
+        }
+        const entry = s2TopicMap.get(q.topic);
+        entry.total += 1;
+        if (res && res.isCorrect) entry.correct += 1;
+      });
+
+      const s1Topics = Array.from(s1TopicMap.values());
+      const s2Topics = Array.from(s2TopicMap.values());
+
+      // Format kolom Nilai untuk Google Sheets:
+      // "Bahasa Indonesia: X (benar/ditampilkan) | PK: Y (benar/total)"
+      const nilaiFormatted = `Bahasa Indonesia: ${s1Score} (${s1Correct}/${s1Displayed}) | PK: ${s2Score} (${s2Correct}/${s2Total})`;
+
+      // Format Analisis Latihan (daftar subtopik 1 & 2 dengan rasio (benar/total) untuk RichText merah & tebal di Sheets)
+      const analisisLines = [
+        "[TAHAP 1: PENGUATAN KONSEP BAHASA INDONESIA]",
+        ...s1Topics.map((t) => `- ${t.topic}: (${t.correct}/${t.total})`),
+        "",
+        "[TAHAP 2: PENGETAHUAN & PEMAHAMAN UMUM]",
+        ...s2Topics.map((t) => `- ${t.topic}: (${t.correct}/${t.total})`)
+      ];
+      const analisisFormatted = analisisLines.join("\n");
+
+      return {
+        s1Displayed,
+        s1Correct,
+        s1Wrong,
+        s1Score,
+        s2Total,
+        s2Correct,
+        s2Wrong,
+        s2Score,
+        totalCorrect,
+        totalWrong,
+        durationStr,
+        tabSwitchCount,
+        s1Topics,
+        s2Topics,
+        nilaiFormatted,
+        analisisFormatted
+      };
+    }
+
+    function renderClosingPage() {
+      stopQuestionTimer();
+      showOnlyView("closingView");
+
+      const summary = computeEvaluationSummary();
+
+      document.getElementById("closingStudentName").textContent = appState.studentName;
+      document.getElementById("closingStudentClass").textContent = `Kelas ${appState.studentClass} • Brain Academy Bogor Permata`;
+
+      document.getElementById("scoreStage1Value").textContent = summary.s1Score;
+      document.getElementById("scoreStage1Detail").textContent = `Benar ${summary.s1Correct} dari ${summary.s1Displayed} soal yang ditampilkan`;
+
+      document.getElementById("scoreStage2Value").textContent = summary.s2Score;
+      document.getElementById("scoreStage2Detail").textContent = `Benar ${summary.s2Correct} dari ${summary.s2Total} soal`;
+
+      document.getElementById("summaryTotalCorrect").textContent = summary.totalCorrect;
+      document.getElementById("summaryTotalWrong").textContent = summary.totalWrong;
+      document.getElementById("summaryDuration").textContent = summary.durationStr;
+
+      // Isi teks analisis mentah tersembunyi (display: none) untuk tombol salin
+      const rawHiddenEl = document.getElementById("rawAnalysisHidden");
+      const fullClipboardReport =
+        `LAPORAN HASIL ROAD TO SNBT 2027 — BRAIN ACADEMY BOGOR PERMATA\n` +
+        `Nama Siswa : ${appState.studentName}\n` +
+        `Kelas      : ${appState.studentClass}\n` +
+        `Nilai      : ${summary.nilaiFormatted}\n` +
+        `Total Benar: ${summary.totalCorrect} | Total Salah: ${summary.totalWrong} | Durasi: ${summary.durationStr}\n\n` +
+        `${summary.analisisFormatted}`;
+      rawHiddenEl.textContent = fullClipboardReport;
+
+      // Handler tombol "Salin Laporan Analisis"
+      const copyBtn = document.getElementById("copyAnalysisBtn");
+      const copyBtnText = document.getElementById("copyAnalysisBtnText");
+      copyBtn.onclick = async () => {
+        try {
+          await navigator.clipboard.writeText(fullClipboardReport);
+          copyBtnText.textContent = "Laporan Berhasil Disalin!";
+          setTimeout(() => {
+            copyBtnText.textContent = "Salin Laporan Analisis";
+          }, 2500);
+        } catch (err) {
+          const tempTa = document.createElement("textarea");
+          tempTa.value = fullClipboardReport;
+          document.body.appendChild(tempTa);
+          tempTa.select();
+          document.execCommand("copy");
+          document.body.removeChild(tempTa);
+          copyBtnText.textContent = "Laporan Berhasil Disalin!";
+          setTimeout(() => {
+            copyBtnText.textContent = "Salin Laporan Analisis";
+          }, 2500);
+        }
+      };
+
+      // Render kartu pemetaan penguasaan subtopik
+      const allTopics = [...summary.s1Topics, ...summary.s2Topics];
+      const grid = document.getElementById("subtopicMasteryGrid");
+      grid.innerHTML = "";
+
+      allTopics.forEach((item) => {
+        const isTuntas = item.correct === item.total;
+        const card = document.createElement("div");
+        card.className = `p-4 rounded-xl border ${
+          isTuntas ? "bg-emerald-50/50 border-emerald-200" : "bg-rose-50/50 border-rose-200"
+        } flex items-center justify-between gap-3`;
+
+        card.innerHTML = `
+          <div class="min-w-0">
+            <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              ${item.stage === 1 ? "Tahap 1 • Bahasa Indonesia" : "Tahap 2 • PPU"}
+            </div>
+            <div class="text-sm font-bold text-slate-800 truncate">${item.topic}</div>
+          </div>
+          <span class="shrink-0 px-3 py-1 rounded-full text-xs font-extrabold ${
+            isTuntas
+              ? "bg-emerald-100 text-emerald-800 border border-emerald-300"
+              : "bg-rose-100 text-rose-800 border border-rose-300"
+          }">
+            ${isTuntas ? "Tuntas" : "Perlu Penguatan"}
+          </span>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Render Rekomendasi Agenda Konsultasi (Klinik PR BA)
+      const weakTopics = allTopics.filter((t) => t.correct < t.total);
+      const klinikBox = document.getElementById("klinikPrRecommendations");
+
+      if (weakTopics.length === 0) {
+        klinikBox.innerHTML = `
+          <p class="font-semibold text-emerald-800">
+            Luar biasa, ${appState.studentName}! Seluruh subtopik pada sesi ini telah mencapai status <strong>Tuntas</strong>.
+          </p>
+          <p class="text-slate-600">
+            Agenda Klinik PR BA yang disarankan: <strong>Pengayaan Soal HOTS SNBT Tingkat Lanjut</strong> serta pendalaman strategi manajemen waktu subtes PPU bersama Master Teacher.
+          </p>
+        `;
+      } else {
+        const listItems = weakTopics
+          .map(
+            (w) =>
+              `<li class="flex items-start gap-2"><span class="text-amber-600 font-bold">&bull;</span><span><strong>${w.topic}</strong> (${w.stage === 1 ? "Konsep Bahasa Indonesia" : "Pengetahuan & Pemahaman Umum"})</span></li>`
+          )
+          .join("");
+
+        klinikBox.innerHTML = `
+          <p class="text-slate-700">
+            Berdasarkan hasil diagnostik kamu, bawalah daftar topik prioritas berikut saat sesi <strong>Klinik PR</strong> bersama Guru / Master Teacher Brain Academy Bogor Permata:
+          </p>
+          <ul class="space-y-1.5 pt-1 text-slate-800">
+            ${listItems}
+          </ul>
+        `;
+      }
+
+      // Render ulang seluruh formula LaTeX pada halaman penutup
+      triggerMathJax();
+    }
+
+    async function submitResultsToGoogleSheets() {
+      if (!appState || appState.submittedToSheets) return;
+      if (!GOOGLE_SCRIPT_WEB_APP_URL || GOOGLE_SCRIPT_WEB_APP_URL.includes("YOUR_GOOGLE_APPS_SCRIPT")) {
+        return;
+      }
+
+      const summary = computeEvaluationSummary();
+      const payload = {
+        namaSiswa: appState.studentName,
+        kelas: appState.studentClass,
+        nilai: summary.nilaiFormatted,
+        jumlahBenar: summary.totalCorrect,
+        jumlahSalah: summary.totalWrong,
+        durasiPengerjaan: summary.durationStr,
+        keluarTab: `${summary.tabSwitchCount} kali`,
+        analisisLatihan: summary.analisisFormatted
+      };
+
+      const syncBadge = document.getElementById("syncStatusBadge");
+      if (syncBadge) {
+        syncBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-300 animate-ping"></span><span>Mengirim Rekap...</span>`;
+      }
+
+      try {
+        await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        appState.submittedToSheets = true;
+        await saveDualState(appState);
+
+        if (syncBadge) {
+          syncBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>Terekam di Server</span>`;
+        }
+      } catch (err) {
+        if (syncBadge) {
+          syncBadge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>Tersimpan Lokal</span>`;
+        }
+      }
+    }
+
+    // Jalankan inisialisasi saat halaman dimuat
+    document.addEventListener("DOMContentLoaded", bootstrapApp);
+  </script>
+</body>
+</html>
